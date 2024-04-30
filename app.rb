@@ -2,7 +2,9 @@ require 'roda'
 require 'phlex'
 require 'tempfile'
 
+require_relative 'application_component'
 require_relative 'app_layout_component'
+require_relative 'rendered_results_preview_component'
 class PreviewApp < Roda
   plugin :render
 
@@ -27,7 +29,9 @@ class PreviewApp < Roda
 
         # Render the instance of the newly defined class
         response['Content-Type'] = 'text/html'
-        instance.call
+        html = instance.call
+        RenderedResultsPreviewComponent.new(html).call
+        
       rescue => e
         response.status = 422
         e.message + "\n" + e.backtrace.join("<br/>\n")

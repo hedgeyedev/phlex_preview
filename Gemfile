@@ -6,3 +6,5 @@ source "https://rubygems.org"
 
 gem "phlex", "~> 1.10"
 gem "roda", "~> 3.79"
+
+gem "rouge", "~> 4.2"

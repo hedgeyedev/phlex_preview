@@ -1,11 +1,12 @@
 require 'phlex'
 
-class AppLayoutComponent < Phlex::HTML
+class AppLayoutComponent < ApplicationComponent
   def view_template
     html do
       head do
         title { "Phlex Preview App" }
-        style {"textarea, iframe { width: 100%; height: 200px; margin-bottom: 20px; }"}
+        common_styles
+        style {"textarea, iframe { width: 100%; height: 500px; margin-bottom: 20px; }"}
       end
 
       body do
