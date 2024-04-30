@@ -1,6 +1,10 @@
 require 'phlex'
 
 class AppLayoutComponent < ApplicationComponent
+  def initialize(phlex_code, params)
+    @phlex_code = phlex_code
+    @params = params
+  end
 
   def app_styles
     style {
@@ -84,16 +88,21 @@ CSS
 
       body do
         div(class: "container") do 
-        
+          form(action: "/load", method: "post", enctype: "multipart/form-data") do
+            whitespace
+            input(type: "file", name: "file", accept: ".rb")
+            whitespace
+            button(type: "submit") { "Load Phlex Component" }
+          end
           h1 {"Phlex Preview App"}
           div(class: "section") do
 
             form action: "/render", method: "post", target: "preview_frame" do
               label(for: 'code') { "Phlex Code:"}
-              textarea name: "code", placeholder: "#Type your Phlex component code here...\nclass YourComponent < Phlex::HTML\n  ..."
+              textarea( name: "code", placeholder: "#Type your Phlex component code here...\nclass YourComponent < Phlex::HTML\n  ...") { @phlex_code }
               
               label(for: 'params') {"How to invoke your component(include necessary params):"}
-              textarea(class: 'params', name: "params", placeholder: "e.g., UserProfileComponent(User.new(name: 'John Doe'))")
+              textarea(class: 'params', name: "params", placeholder: "e.g., UserProfileComponent(User.new(name: 'John Doe'))") { @params }
               
               button( type: "submit") { "Render"}
             end
@@ -108,3 +117,16 @@ CSS
     end
   end
 end
+
+# Sample invocation:
+# class User
+#   attr_reader :name, :email
+#   def initialize(name, email)
+#     @name = name
+#     @email = email
+#   end
+# end
+# code = "class UserProfileComponent < Phlex::HTML\n  def initialize(user)\n    @user = user\n  end\n\n  def view_template\n    div {\n      h1 { @user.name }\n      p { @user.email }\n    }\n  end\nend"
+# params = "UserProfileComponent.new(User.new('John Doe', 'john@example.com')) "
+# AppLayoutComponent.new(html, params)
+# End Sample invocation

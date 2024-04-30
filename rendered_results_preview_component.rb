@@ -44,3 +44,7 @@ class RenderedResultsPreviewComponent < ApplicationComponent
   end
 
 end
+
+# Sample invocation:
+# RenderedResultsPreviewComponent.new("<h1>text</ha>")
+# End Sample invocation
