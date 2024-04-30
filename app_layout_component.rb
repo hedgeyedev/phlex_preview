@@ -75,6 +75,7 @@ h1 {
 }
 textarea, iframe { width: 100%; height: 500px; margin-bottom: 20px; }
 .params { height: 100px; margin-bottom: 20px; }
+
 CSS
     }
   end
@@ -84,6 +85,7 @@ CSS
         title { "Phlex Preview App" }
         common_styles
         app_styles
+        codemirror_includes
       end
 
       body do
@@ -99,10 +101,10 @@ CSS
 
             form action: "/render", method: "post", target: "preview_frame" do
               label(for: 'code') { "Phlex Code:"}
-              textarea( name: "code", placeholder: "#Type your Phlex component code here...\nclass YourComponent < Phlex::HTML\n  ...") { @phlex_code }
+              textarea( name: "code", id: :code, placeholder: "#Type your Phlex component code here...\nclass YourComponent < Phlex::HTML\n  ...") { @phlex_code }
               
               label(for: 'params') {"How to invoke your component(include necessary params):"}
-              textarea(class: 'params', name: "params", placeholder: "e.g., UserProfileComponent(User.new(name: 'John Doe'))") { @params }
+              textarea(class: 'params', id: :params, name: "params", placeholder: "e.g., UserProfileComponent(User.new(name: 'John Doe'))") { @params }
               
               button( type: "submit") { "Render"}
             end
@@ -113,7 +115,85 @@ CSS
             iframe name: "preview_frame", srcdoc: "Your rendered output will appear here..."
           end
         end
+        codemirror_attach
       end
+    end
+  end
+
+  def codemirror_includes
+    
+    comment { "CodeMirror CSS" }
+    link(
+      rel: "stylesheet",
+      href:
+        "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css"
+    ) 
+
+    comment { "CodeMirror JavaScript Library" }
+    script(
+      src:
+        "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"
+    )
+
+    comment { "Ruby mode" }
+    script(
+      src:
+        "https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/ruby/ruby.min.js"
+    )
+    style { unsafe_raw <<~CSS
+/* Basic styling for CodeMirror */
+.CodeMirror {
+    border: 1px solid #ccc;  /* Adds a light grey border around the editor */
+    padding: 10px;           /* Adds padding inside the editor for better text alignment */
+    background-color: #f7f7f7; /* A light background color */
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    height: auto;            /* Adjust height as needed */
+    min-height: 200px;       /* Minimum height to ensure sufficient editing space */
+}
+
+/* Specific styling for focused editor */
+.CodeMirror-focused {
+    border-color: #blue; /* Highlight border when editor is focused */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Soft blue glow around editor */
+}
+
+
+#code + .CodeMirror, #invocation-textarea + .CodeMirror {
+  height: 500px !important; /* Use !important to override any inline styles */
+}
+
+#params + .CodeMirror {
+  height: 100px !important; /* Separate rule to set a different height */
+}
+
+CSS
+    }
+    end
+
+  def codemirror_attach
+    script do
+      unsafe_raw <<~JS
+        document.addEventListener("DOMContentLoaded", function() {
+          CodeMirror.fromTextArea(document.getElementById('code'), {
+            lineNumbers: true,
+            mode: 'ruby',
+            theme: 'default',
+            foldGutter: true,
+            indentUnit: 2,
+            tabSize: 2,
+            indentWithTabs: false
+          });
+
+          CodeMirror.fromTextArea(document.getElementById('params'), {
+            lineNumbers: true,
+            mode: 'ruby',
+            theme: 'default',
+            indentUnit: 2,
+            tabSize: 2,
+            indentWithTabs: false
+          });
+        });
+      JS
     end
   end
 end
