@@ -199,7 +199,24 @@ CSS
 end
 
 # Sample invocation:
-# code = "class UserProfileComponent < Phlex::HTML\n  def initialize(user)\n    @user = user\n  end\n\n  def view_template\n    div {\n      h1 { @user.name }\n      p { @user.email }\n    }\n  end\nend"
-# params = "UserProfileComponent.new(User.new('John Doe', 'john@example.com')) "
+# code = <<~RUBY
+# class UserProfileComponent < Phlex::HTML
+#   def initialize(user)
+#     @user = user
+#   end
+
+#   def view_template
+#     div {
+#       h1 { @user.name }
+#       p { @user.email }
+#     }
+#   end
+# end
+# RUBY
+# params = <<~RUBY
+# user = Object.new
+# def user.name = 'John Doe'
+# def user.email = 'john@example.com'
+# RUBY
 # AppLayoutComponent.new(code, params)
 # End Sample invocation
