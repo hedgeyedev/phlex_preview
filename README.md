@@ -35,6 +35,16 @@ A quick and dirty phlex preview written because I was trying to understand some 
 # End Sample invocation
 
 ```
+- example from app_layout_component.rb
+
+``` ruby
+# Sample invocation:
+# code = "class UserProfileComponent < Phlex::HTML\n  def initialize(user)\n    @user = user\n  end\n\n  def view_template\n    div {\n      h1 { @user.name }\n      p { @user.email }\n    }\n  end\nend"
+# params = "UserProfileComponent.new(User.new('John Doe', 'john@example.com')) "
+# AppLayoutComponent.new(code, params)
+# End Sample invocation
+
+```
 
 - This serves a part documentation as well as as something to automatically put into the invocation portion to render
 - Also serves the future "poor man's Storybook" feature to be able to auto preview all your components
