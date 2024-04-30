@@ -7,6 +7,10 @@ A quick and dirty phlex preview written because I was trying to understand some 
 - Minimum Javascript/CSS load
   - Was no JS at all until I added Codemirror to syntax highlight the ruby
   - No CSS framework
+  - How long can we keep it like this
+    - ![image](https://github.com/hedgeyedev/phlex_preview/assets/13941/306f0df6-91c9-40e9-9a33-9d2c0eff419e)
+    - Though technically not true, there's some embedded css and js
+
 - Explore the perks of having everything Ruby and mostly server side (blog post forthcoming)
 
 # Aspirations
