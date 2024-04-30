@@ -48,7 +48,8 @@ A quick and dirty phlex preview written because I was trying to understand some 
 
 - This serves a part documentation as well as as something to automatically put into the invocation portion to render
 - Also serves the future "poor man's Storybook" feature to be able to auto preview all your components
-- To be delightly recursive -open the rendered_results_preview_component.rb to see it on it's own components
+- To be delightly recursive 
+  - open the either of the rendered_results_preview_component.rb or app_layout_component.rb to see it render it's own components in itself
 
 # Caveats
 - Initial version super not safe, only intended to be run in development, may explore sandboxing later, but trying to think about also being able to handle components that invoke other components, so I want to have it in same app. TBD
