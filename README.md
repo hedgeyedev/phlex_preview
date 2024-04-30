@@ -40,6 +40,10 @@ A quick and dirty phlex preview written because I was trying to understand some 
 - Initial version super not safe, only intended to be run in development, may explore sandboxing later, but trying to think about also being able to handle components that invoke other components, so I want to have it in same app. TBD
 
 # Pics
+## Edit component code, specify invocation
 ![image](https://github.com/hedgeyedev/phlex_preview/assets/13941/336bc4dd-caec-49b2-be89-2c437e178e57)
+
+## See both rendered and raw html - meta example, rendering that component
 ![image](https://github.com/hedgeyedev/phlex_preview/assets/13941/fd9140d3-3c0b-41e5-a019-32186c58eca6)
+## Actual html of that component
 ![image](https://github.com/hedgeyedev/phlex_preview/assets/13941/c127e5bd-7242-4c6e-a5a7-f6c70c3012dc)
