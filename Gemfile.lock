@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    phlex (1.10.2)
+    rack (3.0.10)
+    roda (3.79.0)
+      rack
+
+PLATFORMS
+  ruby
+  x86_64-darwin-20
+
+DEPENDENCIES
+  phlex (~> 1.10)
+  roda (~> 3.79)
+
+BUNDLED WITH
+   2.5.6
