@@ -6,6 +6,7 @@ require 'uri'
 require_relative 'application_component'
 require_relative 'app_layout_component'
 require_relative 'rendered_results_preview_component'
+
 class PreviewApp < Roda
   plugin :render
 
@@ -13,7 +14,6 @@ class PreviewApp < Roda
     r.root do
       phlex_code = r.params['phlex_code']
       params_code = r.params['params']
-      # Assuming `AppLayout` is a Phlex component you have defined to layout the app
       AppLayoutComponent.new(phlex_code, params_code).call
     end
 
@@ -53,7 +53,7 @@ class PreviewApp < Roda
 
       # Extracting invocation parameters
       params_match = content.match(/# Sample invocation:(.*?)# end Sample invocation/mi)
-      params_code = params_match[1].strip.gsub("#", '') if params_match
+      params_code = params_match[1].strip.gsub(/^#/, '') if params_match
       puts "params_code = |#{params_code}|"
       response.redirect "/?phlex_code=#{URI.encode_www_form_component(phlex_code)}&params=#{URI.encode_www_form_component(params_code)}"
 

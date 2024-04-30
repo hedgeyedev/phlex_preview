@@ -199,14 +199,8 @@ CSS
 end
 
 # Sample invocation:
-# class User
-#   attr_reader :name, :email
-#   def initialize(name, email)
-#     @name = name
-#     @email = email
-#   end
-# end
+
 # code = "class UserProfileComponent < Phlex::HTML\n  def initialize(user)\n    @user = user\n  end\n\n  def view_template\n    div {\n      h1 { @user.name }\n      p { @user.email }\n    }\n  end\nend"
 # params = "UserProfileComponent.new(User.new('John Doe', 'john@example.com')) "
-# AppLayoutComponent.new(html, params)
+# AppLayoutComponent.new(code, params)
 # End Sample invocation
