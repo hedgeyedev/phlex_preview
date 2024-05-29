@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class ComponentSelector < Phlex::HTML
-  def initialize(label, component, explanatory_component = nil, args: [], kw_args: {})
+  def initialize(label, component, active: false, explanatory_component: nil, args: [], kw_args: {})
+    @active                = active
     @label                 = label
     @component             = component
     @explanatory_component = explanatory_component
@@ -9,8 +10,12 @@ class ComponentSelector < Phlex::HTML
     @kw_args               = kw_args.blank? ? {} : kw_args.map { |k, v| "kw_args[#{k}]=#{v}" }.join("&")
   end
 
+  def active?
+    @active
+  end
+
   def view_template(&)
-    div(class: "component-selection") do
+    div(**classes("component-selection", active?: "active")) do
       name        = "name=#{@component}"
       explanation = @explanatory_component ? "explanation=#{@explanatory_component}" : nil
       a(

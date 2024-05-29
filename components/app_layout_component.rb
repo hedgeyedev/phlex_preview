@@ -78,9 +78,13 @@ class AppLayoutComponent < ApplicationComponent
         .component-selection > a {
           font-size: 0.75rem;
           text-decoration: none;
+          padding-left: 1ch;
         }
         .component-selection > a:visited {
-          color: rgb(0, 0, 238)
+          color: rgb(0, 0, 238);
+        }
+        .component-selection.active {
+          background-color: rgba(0, 0, 238, 0.3);
         }
 
         .container {
@@ -251,35 +255,41 @@ class AppLayoutComponent < ApplicationComponent
         render ComponentSelector.new(
           "Labelized Checkbox",
           LabelizedCheckbox,
+          active: "LabelizedCheckbox" == @component_name,
           kw_args: {label: "Checkbox Label", name: "checkbox_name", left: true},
         )
         render ComponentSelector.new(
           "Labelized Text Input",
           LabelizedInput,
+          active: "LabelizedInput" == @component_name,
           kw_args: {label: "Text Input Label", name: "input_name", type: "text"},
         )
         render ComponentSelector.new(
           "Labelized Date Input",
           LabelizedDateInput,
-          LabelizedMagnitudeExplanation,
+          active: "LabelizedDateInput" == @component_name,
+          explanatory_component: LabelizedMagnitudeExplanation,
           kw_args: {label: "Date Input Label", name: "input_name"},
         )
         render ComponentSelector.new(
           "Labelized Date/Time Input",
           LabelizedDateTimeInput,
-          LabelizedMagnitudeExplanation,
+          active: "LabelizedDateTimeInput" == @component_name,
+          explanatory_component: LabelizedMagnitudeExplanation,
           kw_args: {label: "Date/Time Input Label", name: "input_name"},
         )
         render ComponentSelector.new(
           "Labelized Number Input",
           LabelizedNumberInput,
-          LabelizedMagnitudeExplanation,
+          active: "LabelizedNumberInput" == @component_name,
+          explanatory_component: LabelizedMagnitudeExplanation,
           kw_args: {label: "Number Input Label", name: "input_name"},
         )
         render ComponentSelector.new(
           "Labelized Time Input",
           LabelizedTimeInput,
-          LabelizedMagnitudeExplanation,
+          active: "LabelizedTimeInput" == @component_name,
+          explanatory_component: LabelizedMagnitudeExplanation,
           kw_args: {label: "Time Input Label", name: "input_name", min: "09:00", max: "17:00"},
         )
       end
