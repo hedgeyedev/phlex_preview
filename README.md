@@ -20,9 +20,9 @@ A quick and dirty phlex preview written because I was trying to understand some 
 
 # Running
 - clone
-- bundle install
-- rackup (I use rerun to autoload in development)
-- hit localhost:9292
+- `bundle install`
+- `bundle exec puma -p 6001` or `bundle exec rerun -- puma -p 6001` (the "rerun" gem will watch for filesystem changes and restart your application)
+- navigate to localhost:6001 in a browser
 - Create the code and the invocation to be rendered
 
 # Specifying invocations
@@ -48,7 +48,7 @@ A quick and dirty phlex preview written because I was trying to understand some 
 
 - This serves a part documentation as well as as something to automatically put into the invocation portion to render
 - Also serves the future "poor man's Storybook" feature to be able to auto preview all your components
-- To be delightly recursive 
+- To be delightly recursive
   - open the either of the rendered_results_preview_component.rb or app_layout_component.rb to see it render it's own components in itself
 
 # Caveats
