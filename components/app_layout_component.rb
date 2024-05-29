@@ -247,7 +247,7 @@ class AppLayoutComponent < ApplicationComponent
     div(class: "sidebar") do
       div(class: "section") do
         strong { "Meta Components" }
-        render ComponentSelector.new("Phlex Preview App", PhlexPreviewApp)
+        render ComponentSelector.new("Phlex Preview App", PhlexPreviewApp, active: "PhlexPreviewApp" == @component_name)
       end
 
       div(class: "section") do
