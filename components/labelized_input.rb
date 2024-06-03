@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require 'securerandom'
+
 class LabelizedInput < Phlex::HTML
-  def initialize(label:, name:, type:, vertical: true, **attrs)
+  def initialize(label:, name: SecureRandom.uuid, type: "text", vertical: true, **attrs)
     @label    = label
     @name     = name
     @id       = attrs.delete(:id) || name
@@ -26,7 +28,7 @@ class LabelizedInput < Phlex::HTML
 
   def app_styles
     style do
-      unsafe_raw <<~CSS
+      css = <<~CSS
         .field {
           display: grid;
           grid-template-columns: minmax(10%, 1fr) 4fr;
@@ -41,16 +43,21 @@ class LabelizedInput < Phlex::HTML
           display: block;
           margin: auto 0;
         }
-        .field input {
-          min-width: fit-content;
-          padding: 10px;
-          border-radius: 4px;
-          border: 1px solid #ddd;
-          background-color: #f9f9f9;
-          color: #333;
-          display: block;
-        }
       CSS
+      unless color?
+        css += <<~CSS
+          .field input {
+            min-width: fit-content;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+            color: #333;
+            display: block;
+          }
+        CSS
+      end
+      unsafe_raw css
     end
   end
 
@@ -64,5 +71,11 @@ class LabelizedInput < Phlex::HTML
 
   def make_input
     input(**input_args)
+  end
+
+  private
+
+  def color?
+    @type == "color"
   end
 end

@@ -293,6 +293,48 @@ class AppLayoutComponent < ApplicationComponent
           kw_args: {label: "Time Input Label", name: "input_name", min: "09:00", max: "17:00"},
         )
       end
+
+
+      div(class: "section") do
+        values  = 15.times.map { rand * 100 }
+        average = -> { strong { format("Average Fluberhaits: %0.2f%%", values.sum / values.size) } }
+        strong { "UI Components" }
+        render ComponentSelector.new(
+          "Histogram",
+          Histogram,
+          active: "Histogram" == @component_name,
+          kw_args: {label: "Simple HTML/CSS Histogram", values: values, in_chart_highlight: average},
+        )
+        render ComponentSelector.new(
+          "Bar Chart",
+          BarChart,
+          active: "BarChart" == @component_name,
+          kw_args: {
+            label: "HTML/CSS BarChart",
+            values: {
+              "IE 11"   => 11.33,
+              "Chrome"  => 49.77,
+              "Firefox" => 16.09,
+              "Safari"  => 5.41,
+              "Opera"   => 1.62,
+              "Brave"   => 13.5,
+              "Other"   => 2.28,
+            },
+            label_styles: "font-size: 0.7rem; font-weight: 900; text-transform: uppercase;",
+          },
+        )
+        render ComponentSelector.new(
+          "Pie Chart",
+          PieChart,
+          active: "PieChart" == @component_name,
+          kw_args: {
+            label: "HTML/CSS PieChart (using polyfill)",
+            values: {"yellowgreen" => 40, "gold" => 30, "#f06" => :remainder},
+            radius: "10rem",
+            label_styles: "font-size: 0.7rem; font-weight: 400; text-transform: uppercase;",
+          },
+        )
+      end
     end
   end
 

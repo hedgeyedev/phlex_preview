@@ -15,5 +15,8 @@ require_relative 'components/labelized_input'
 require_relative 'components/labelized_magnitude_input'
 
 relative_requirer = ->(f) { require_relative File.join('components', File.basename(f, '.rb')) }
-Dir.glob(File.join(__dir__, 'components', 'labelized_*_input.rb')).each(&relative_requirer)
-Dir.glob(File.join(__dir__, 'components', '*_explanation.rb')).each(&relative_requirer)
+Dir.glob(File.join(__dir__, 'components', '*.rb')).each do |f|
+  next if f =~ /labelized_checkbox|labelized_input|labelized_magnitude_input/
+
+  require_relative File.join('components', File.basename(f, '.rb'))
+end
