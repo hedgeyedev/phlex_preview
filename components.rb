@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+Phlex::SELECTABLE_COMPONENTS = []
+
 require 'phlex'
 require 'active_support'
 require 'active_support/core_ext'

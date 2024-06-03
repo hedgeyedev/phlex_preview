@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PieChart < Phlex::HTML
+  Phlex::SELECTABLE_COMPONENTS << self
 
   def self.as_component_selector(active_component_name = nil)
     ComponentSelector.new(
@@ -16,7 +17,7 @@ class PieChart < Phlex::HTML
     )
   end
 
-  def self.catgories
+  def self.categories
     ["Charts"]
   end
 

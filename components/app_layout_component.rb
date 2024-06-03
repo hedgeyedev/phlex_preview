@@ -245,27 +245,19 @@ class AppLayoutComponent < ApplicationComponent
 
   def sidebar
     div(class: "sidebar") do
-      div(class: "section") do
-        strong { "Meta Components" }
-        render PhlexPreviewApp.as_component_selector(@component_name)
-      end
-
-      div(class: "section") do
-        strong { "Input Components" }
-        render LabelizedCheckbox.as_component_selector(@component_name)
-        render LabelizedInput.as_component_selector(@component_name)
-        render LabelizedDateInput.as_component_selector(@component_name)
-        render LabelizedDateTimeInput.as_component_selector(@component_name)
-        render LabelizedNumberInput.as_component_selector(@component_name)
-        render LabelizedTimeInput.as_component_selector(@component_name)
-      end
-
-
-      div(class: "section") do
-        strong { "UI Components" }
-        render BarChart.as_component_selector(@component_name)
-        render Histogram.as_component_selector(@component_name)
-        render PieChart.as_component_selector(@component_name)
+      Phlex::SELECTABLE_COMPONENTS.map.with_object({}) do |component, hash|
+        next unless component.respond_to?(:categories)
+        component.categories.each do |category|
+          hash[category] ||= []
+          hash[category] << component unless hash[category].include?(component)
+        end
+      end.compact.each do |category, components|
+        div(class: "section") do
+          strong { category }
+          components.each do |component|
+            render component.as_component_selector(@component_name)
+          end
+        end
       end
     end
   end

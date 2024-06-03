@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class LabelizedCheckbox < Phlex::HTML
+  Phlex::SELECTABLE_COMPONENTS << self
+
   def self.as_component_selector(active_component_name = nil)
     ComponentSelector.new(
       "Labelized Checkbox",

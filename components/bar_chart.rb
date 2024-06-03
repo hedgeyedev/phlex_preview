@@ -3,6 +3,8 @@
 class BarChart < Phlex::HTML
   attr_reader :bar_color, :bar_hover_color, :text_color, :bg_color
 
+  Phlex::SELECTABLE_COMPONENTS << self
+
   def self.as_component_selector(active_component_name = nil)
     ComponentSelector.new(
       "Bar Chart",
@@ -24,7 +26,7 @@ class BarChart < Phlex::HTML
     )
   end
 
-  def self.catgories
+  def self.categories
     ["Charts"]
   end
 

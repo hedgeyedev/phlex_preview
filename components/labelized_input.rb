@@ -3,6 +3,8 @@
 require 'securerandom'
 
 class LabelizedInput < Phlex::HTML
+  Phlex::SELECTABLE_COMPONENTS << self
+
   def self.as_component_selector(active_component_name = nil)
     ComponentSelector.new(
       "Labelized Input",

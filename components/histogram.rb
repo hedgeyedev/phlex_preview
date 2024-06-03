@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Histogram < Phlex::HTML
+  Phlex::SELECTABLE_COMPONENTS << self
+
   def self.as_component_selector(active_component_name = nil)
     values  = 15.times.map { rand * 100 }
     average = -> { strong { format("Average Fluberhaits: %0.2f%%", values.sum / values.size) } }
@@ -12,7 +14,7 @@ class Histogram < Phlex::HTML
     )
   end
 
-  def self.catgories
+  def self.categories
     ["Charts"]
   end
 
