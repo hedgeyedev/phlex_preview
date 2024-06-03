@@ -129,7 +129,10 @@ class AppLayoutComponent < ApplicationComponent
   end
 
   def component_code
-    File.read File.join '.', 'components', "#{@component_name.underscore}.rb"
+    file = File.join '.', 'components', "#{@component_name.underscore}.rb"
+    return unless File.exist?(file)
+
+    File.read file
   end
 
   def view_template
@@ -146,14 +149,21 @@ class AppLayoutComponent < ApplicationComponent
         div(class: "storybook") do
           sidebar
           component_view do
-            render (constantize(@explanatory_component) || NoExplanation).new
+            explanation_class = constantize(@explanatory_component) || NoExplanation
+            component_class   = constantize(@component_name)
+
+            render explanation_class.new
             hr
+
             div(id: "component_view") do
-              render constantize(@component_name).new(*@component_args, **@component_kwargs, &@component_blk)
+              render component_class.new(*@component_args, **@component_kwargs, &@component_blk)
             end
-            hr
-            h1 { "Component Code" }
-            textarea(id: 'component_code') { component_code }
+
+            if component_class != AppLayoutComponent::Blank
+              hr
+              h1 { "Component Code" }
+              textarea(id: 'component_code') { component_code }
+            end
           end
         end
         codemirror_attach
