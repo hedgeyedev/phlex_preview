@@ -3,6 +3,31 @@
 class BarChart < Phlex::HTML
   attr_reader :bar_color, :bar_hover_color, :text_color, :bg_color
 
+  def self.as_component_selector(active_component_name = nil)
+    ComponentSelector.new(
+      "Bar Chart",
+      self,
+      active: name == active_component_name,
+      kw_args: {
+        label: "HTML/CSS BarChart",
+        values: {
+          "IE 11"   => 11.33,
+          "Chrome"  => 49.77,
+          "Firefox" => 16.09,
+          "Safari"  => 5.41,
+          "Opera"   => 1.62,
+          "Brave"   => 13.5,
+          "Other"   => 2.28,
+        },
+        label_styles: "font-size: 0.7rem; font-weight: 900; text-transform: uppercase;",
+      },
+    )
+  end
+
+  def self.catgories
+    ["Charts"]
+  end
+
   def initialize(label:, values:, **attrs)
     @label           = label
     @values          = values

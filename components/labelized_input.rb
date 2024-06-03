@@ -3,6 +3,19 @@
 require 'securerandom'
 
 class LabelizedInput < Phlex::HTML
+  def self.as_component_selector(active_component_name = nil)
+    ComponentSelector.new(
+      "Labelized Input",
+      self,
+      active: name == active_component_name,
+      kw_args: {label: "Text Input Label", name: "input_name", type: "text"},
+    )
+  end
+
+  def self.categories
+    ["Input Components"]
+  end
+
   def initialize(label:, name: SecureRandom.uuid, type: "text", vertical: true, **attrs)
     @label    = label
     @name     = name

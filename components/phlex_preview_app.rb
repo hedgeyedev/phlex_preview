@@ -1,4 +1,12 @@
 class PhlexPreviewApp < Phlex::HTML
+  def self.as_component_selector(active_component_name = nil)
+    ComponentSelector.new("Phlex Preview App", self, active: name == active_component_name)
+  end
+
+  def self.categories
+    ["Meta Components"]
+  end
+
   def initialize(phlex_code = nil, params = nil, **_kw_params)
     @phlex_code = phlex_code
     @params     = params

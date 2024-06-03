@@ -247,93 +247,25 @@ class AppLayoutComponent < ApplicationComponent
     div(class: "sidebar") do
       div(class: "section") do
         strong { "Meta Components" }
-        render ComponentSelector.new("Phlex Preview App", PhlexPreviewApp, active: "PhlexPreviewApp" == @component_name)
+        render PhlexPreviewApp.as_component_selector(@component_name)
       end
 
       div(class: "section") do
         strong { "Input Components" }
-        render ComponentSelector.new(
-          "Labelized Checkbox",
-          LabelizedCheckbox,
-          active: "LabelizedCheckbox" == @component_name,
-          kw_args: {label: "Checkbox Label", name: "checkbox_name", left: true},
-        )
-        render ComponentSelector.new(
-          "Labelized Text Input",
-          LabelizedInput,
-          active: "LabelizedInput" == @component_name,
-          kw_args: {label: "Text Input Label", name: "input_name", type: "text"},
-        )
-        render ComponentSelector.new(
-          "Labelized Date Input",
-          LabelizedDateInput,
-          active: "LabelizedDateInput" == @component_name,
-          explanatory_component: LabelizedMagnitudeExplanation,
-          kw_args: {label: "Date Input Label", name: "input_name"},
-        )
-        render ComponentSelector.new(
-          "Labelized Date/Time Input",
-          LabelizedDateTimeInput,
-          active: "LabelizedDateTimeInput" == @component_name,
-          explanatory_component: LabelizedMagnitudeExplanation,
-          kw_args: {label: "Date/Time Input Label", name: "input_name"},
-        )
-        render ComponentSelector.new(
-          "Labelized Number Input",
-          LabelizedNumberInput,
-          active: "LabelizedNumberInput" == @component_name,
-          explanatory_component: LabelizedMagnitudeExplanation,
-          kw_args: {label: "Number Input Label", name: "input_name"},
-        )
-        render ComponentSelector.new(
-          "Labelized Time Input",
-          LabelizedTimeInput,
-          active: "LabelizedTimeInput" == @component_name,
-          explanatory_component: LabelizedMagnitudeExplanation,
-          kw_args: {label: "Time Input Label", name: "input_name", min: "09:00", max: "17:00"},
-        )
+        render LabelizedCheckbox.as_component_selector(@component_name)
+        render LabelizedInput.as_component_selector(@component_name)
+        render LabelizedDateInput.as_component_selector(@component_name)
+        render LabelizedDateTimeInput.as_component_selector(@component_name)
+        render LabelizedNumberInput.as_component_selector(@component_name)
+        render LabelizedTimeInput.as_component_selector(@component_name)
       end
 
 
       div(class: "section") do
-        values  = 15.times.map { rand * 100 }
-        average = -> { strong { format("Average Fluberhaits: %0.2f%%", values.sum / values.size) } }
         strong { "UI Components" }
-        render ComponentSelector.new(
-          "Histogram",
-          Histogram,
-          active: "Histogram" == @component_name,
-          kw_args: {label: "Simple HTML/CSS Histogram", values: values, in_chart_highlight: average},
-        )
-        render ComponentSelector.new(
-          "Bar Chart",
-          BarChart,
-          active: "BarChart" == @component_name,
-          kw_args: {
-            label: "HTML/CSS BarChart",
-            values: {
-              "IE 11"   => 11.33,
-              "Chrome"  => 49.77,
-              "Firefox" => 16.09,
-              "Safari"  => 5.41,
-              "Opera"   => 1.62,
-              "Brave"   => 13.5,
-              "Other"   => 2.28,
-            },
-            label_styles: "font-size: 0.7rem; font-weight: 900; text-transform: uppercase;",
-          },
-        )
-        render ComponentSelector.new(
-          "Pie Chart",
-          PieChart,
-          active: "PieChart" == @component_name,
-          kw_args: {
-            label: "HTML/CSS PieChart (using polyfill)",
-            values: {"yellowgreen" => 40, "gold" => 30, "#f06" => :remainder},
-            radius: "10rem",
-            label_styles: "font-size: 0.7rem; font-weight: 400; text-transform: uppercase;",
-          },
-        )
+        render BarChart.as_component_selector(@component_name)
+        render Histogram.as_component_selector(@component_name)
+        render PieChart.as_component_selector(@component_name)
       end
     end
   end

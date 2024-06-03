@@ -1,6 +1,21 @@
 # frozen_string_literal: true
 
 class Histogram < Phlex::HTML
+  def self.as_component_selector(active_component_name = nil)
+    values  = 15.times.map { rand * 100 }
+    average = -> { strong { format("Average Fluberhaits: %0.2f%%", values.sum / values.size) } }
+    ComponentSelector.new(
+      name,
+      self,
+      active: name == active_component_name,
+      kw_args: {label: "Simple HTML/CSS Histogram", values: values, in_chart_highlight: average},
+    )
+  end
+
+  def self.catgories
+    ["Charts"]
+  end
+
   def initialize(label:, values:, in_chart_highlight: nil, **attrs)
     @label              = label
     @values             = values.map { |v| v.to_f }

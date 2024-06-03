@@ -1,6 +1,25 @@
 # frozen_string_literal: true
 
 class PieChart < Phlex::HTML
+
+  def self.as_component_selector(active_component_name = nil)
+    ComponentSelector.new(
+      "Pie Chart",
+      self,
+      active: name == active_component_name,
+      kw_args: {
+        label: "HTML/CSS PieChart (using polyfill)",
+        values: {"yellowgreen" => 40, "gold" => 30, "#f06" => :remainder},
+        radius: "10rem",
+        label_styles: "font-size: 0.7rem; font-weight: 400; text-transform: uppercase;",
+      },
+    )
+  end
+
+  def self.catgories
+    ["Charts"]
+  end
+
   def initialize(label:, values:, horizontal: true, radius: "5rem", **attrs)
     @label      = label
     @values     = values

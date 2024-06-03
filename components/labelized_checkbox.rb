@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
 class LabelizedCheckbox < Phlex::HTML
+  def self.as_component_selector(active_component_name = nil)
+    ComponentSelector.new(
+      "Labelized Checkbox",
+      self,
+      active: name == active_component_name,
+      kw_args: {label: "Checkbox Label", name: "checkbox_name", left: true},
+    )
+  end
+
+  def self.categories
+    ["Input Components"]
+  end
+
   def initialize(label:, name:, left: true, **attrs)
     @label = label
     @name  = name
