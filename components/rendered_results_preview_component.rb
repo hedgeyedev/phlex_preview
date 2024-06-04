@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 require 'rouge'
+
 class RenderedResultsPreviewComponent < ApplicationComponent
   def initialize(html)
     @html = html
@@ -39,7 +42,7 @@ class RenderedResultsPreviewComponent < ApplicationComponent
     end
     div(class: 'rendered-results-preview raw-html') do
       h1 { 'Raw HTML' }
-      div(class: 'highlight') { unsafe_raw @formatter.format(@lexer.lex(@html)) } 
+      div(class: 'highlight') { unsafe_raw @formatter.format(@lexer.lex(@html)) }
     end
   end
 
