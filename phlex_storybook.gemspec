@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "importmap-rails"
   spec.add_dependency "phlex-rails", "~> 1.2"
-  spec.add_dependency "rails", ">= 7.2"
+  spec.add_dependency "rails", ">= 7", "< 8"
   spec.add_dependency "stimulus-rails"
   spec.add_dependency "tailwindcss-rails", "~> 2.7"
   spec.add_dependency "turbo-rails"
