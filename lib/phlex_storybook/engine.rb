@@ -7,7 +7,6 @@ require "phlex_icons"
 require "phlex-rails"
 require "rouge"
 require "turbo_power"
-# require "phlex_ui"
 
 module PhlexStorybook
   class Engine < ::Rails::Engine
