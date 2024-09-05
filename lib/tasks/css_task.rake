@@ -14,5 +14,3 @@ end
 task :tailwind_engine_watch do
   system TAILWIND_BUILD_CMD + " -w"
 end
-
-Rake::Task["app:assets:precompile"].enhance ["tailwind_engine_build"] unless Rails.env.test?

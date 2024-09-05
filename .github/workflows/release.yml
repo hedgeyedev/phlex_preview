@@ -16,7 +16,7 @@ jobs:
         with:
           bundler-cache: true
       - name: Build gem
-        run: bundle exec rails app:assets:precompile build
+        run: bundle exec rails tailwind_engine_build app:assets:precompile build
       - name: List gem
         run: |
           find pkg
