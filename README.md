@@ -17,6 +17,9 @@ end
 
 Browse to your app @ /phlex_storybook. You should see a list of your components and their stories.
 
+## Running locally
+Clone this repo, then execute `bin/dev`. Simple, right?
+
 ## Installation
 Add this to your application's Gemfile:
 
