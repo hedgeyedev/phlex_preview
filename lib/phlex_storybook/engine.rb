@@ -16,7 +16,8 @@ module PhlexStorybook
 
     initializer "phlex_storybook.assets" do |app|
       app.config.assets.paths << root.join("app/javascript")
-      app.config.assets.precompile += %w[ phlex_storybook_manifest ]
+      app.config.assets.paths << root.join("lib/phlex_storybook/assets")
+      app.config.assets.precompile += %w[ config/phlex_storybook_manifest.js phlex_storybook_application.css ]
     end
 
     initializer "phlex_storybook.importmap", before: "importmap" do |app|
