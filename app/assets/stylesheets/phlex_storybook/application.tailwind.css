@@ -34,24 +34,24 @@
       @apply px-2 font-semibold;
     }
   }
+}
 
-  .story-selector {
-    ul {
-      @apply mb-3 w-full;
+.story-selector {
+  ul {
+    @apply mb-3 w-full;
 
-      li {
-        @apply w-full;
+    li {
+      @apply w-full;
 
-        a {
-          @apply pl-2 block hover:bg-slate-900 hover:rounded-md;
-        }
+      a {
+        @apply pl-2 block hover:bg-slate-900 hover:rounded-md;
       }
     }
   }
+}
 
-  li.story-preview-active, li.story-code-active {
-    @apply rounded border-slate-200 bg-slate-900;
-  }
+li.story-preview-active, li.story-code-active {
+  @apply rounded border-slate-200 bg-slate-900;
 }
 
 .lineno {
