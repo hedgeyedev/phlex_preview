@@ -11,11 +11,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Run NPM install
-        run: npm install
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
-        with: 
+        with:
           bundler-cache: true
       - name: Build gem
         run: bundle exec rake build
