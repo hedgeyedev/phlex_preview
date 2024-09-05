@@ -11,9 +11,11 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
 
   spec.post_install_message = <<~MESSAGE
-    PhlexStorybook requires additional setup.
-    Please run the following command to install the necessary files:
-    thor phlex_storybook:install
+    Now add phlex_storybook to your application by mounting it in your `config/routes.rb` file:
+
+      Rails.application.routes.draw do
+        mount PhlexStorybook::Engine => "/phlex_storybook"
+      end
   MESSAGE
 
   spec.metadata["homepage_uri"]    = spec.homepage
