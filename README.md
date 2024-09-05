@@ -1,14 +1,32 @@
 # PhlexStorybook
-Short description and motivation.
+This is a storybook for your Phlex components that allows you to:
+
+* Preview your component
+* View the Ruby Code to render your component
+* Alter properties and see the preview and ruby code changes in real time
+* Write stories to document different facets of your component
 
 ## Usage
-How to use my plugin.
-
-## Installation
-Add this line to your application's Gemfile:
+In your `config/routes.rb` file, mount the engine:
 
 ```ruby
-gem "phlex_storybook"
+Rails.application.routes.draw do
+  mount PhlexStorybook::Engine => "/phlex_storybook"
+end
+```
+
+Browse to your app @ /phlex_storybook. You should see a list of your components and their stories.
+
+## Running locally
+Clone this repo, then execute `bin/dev`. Simple, right?
+
+## Installation
+Add this to your application's Gemfile:
+
+```ruby
+source "https://rubygems.pkg.github.com/hedgeyedev" do
+  gem "phlex_storybook"
+end
 ```
 
 And then execute:
@@ -16,13 +34,5 @@ And then execute:
 $ bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install phlex_storybook
-```
-
-## Contributing
-Contribution directions go here.
-
 ## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](LICENSE).

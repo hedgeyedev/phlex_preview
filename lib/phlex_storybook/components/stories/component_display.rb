@@ -46,7 +46,7 @@ module PhlexStorybook
                 else
                   div(class: "container w-full h-fit min-w-0 mr-0") do
                     render_story_header
-                    render ComponentRendering.new(story_component: @story_component)
+                    render ComponentRendering.new(story_component: @story_component, **@props)
                   end
                 end
               end

@@ -1,3 +1,2 @@
-//= link_tree ../images/phlex_storybook .svg
-//= link_directory ../../javascript/phlex_storybook .js
-//= link_directory ../../javascript/phlex_storybook/controllers .js
+//= link_tree ../../javascript/phlex_storybook .js
+//= link phlex_storybook_application.css
