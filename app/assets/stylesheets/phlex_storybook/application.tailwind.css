@@ -1,0 +1,62 @@
+@import url("//fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-gray-900;
+    @apply dark:bg-gray-900 dark:text-gray-300;
+    font-family: 'Karla', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply scroll-m-20;
+    @apply dark:text-gray-300;
+  }
+  h1 {
+    @apply text-3xl font-bold leading-normal lg:leading-normal tracking-tight lg:text-4xl;
+  }
+  h2 {
+    @apply text-2xl font-semibold tracking-tight transition-colors first:mt-0;
+  }
+  h3 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+  h4 {
+    @apply text-lg font-medium tracking-tight;
+  }
+
+  fieldset {
+    @apply border border-slate-400 p-4 mb-2;
+    legend {
+      @apply px-2 font-semibold;
+    }
+  }
+
+  .story-selector {
+    ul {
+      @apply mb-3 w-full;
+
+      li {
+        @apply w-full;
+
+        a {
+          @apply pl-2 block hover:bg-slate-900 hover:rounded-md;
+        }
+      }
+    }
+  }
+
+  li.story-preview-active, li.story-code-active {
+    @apply rounded border-slate-200 bg-slate-900;
+  }
+}
+
+.lineno {
+  line-height: 0.75rem;
+}
+.rouge-gutter {
+  @apply text-gray-600;
+}

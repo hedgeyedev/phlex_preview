@@ -1,0 +1,84 @@
+name: Release Gem
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build Gem
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run NPM install
+        run: npm install
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with: 
+          bundler-cache: true
+      - name: Build gem
+        run: bundle exec rake build
+      - name: List gem
+        run: |
+          find pkg
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: pkg/*.gem
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test gem
+    needs:
+      - build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: 'pkg'
+      - name: List gem
+        run: |
+          find pkg
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install gem
+        run: |
+          gem install pkg/artifact/*.gem
+
+  push:
+    name: Push Gem to Server
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: pkg
+      - name: List gems
+        run: |
+          find pkg
+      - name: Set up GitHub Packages authentication
+        run: |
+          mkdir -p ~/.gem
+          cat > ~/.gem/credentials <<'CREDENTIALS'
+          ---
+          :github: Bearer ${{ secrets.GITHUB_TOKEN }}
+          CREDENTIALS
+          chmod 0600 ~/.gem/credentials
+      - name: Push gem
+        run: |
+          find pkg/artifact -name '*.gem' | while read -r gem; do
+            echo "=== pushing '${gem}'"
+            gem push --key github --host https://rubygems.pkg.github.com/hedgeyedev "${gem}"
+          done
+      - name: Clean up credentials
+        run: |
+          rm -rvf ~/.gem/credentials
