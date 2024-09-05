@@ -1,10 +1,11 @@
-# frozen_string_literal: true
-
 source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-# gem "rails"
+gemspec
 
-gem "phlex", "~> 1.10"
-gem "roda", "~> 3.79"
-
-gem "rouge", "~> 4.2"
+group :development do
+  gem "puma"
+  gem "sprockets-rails"
+  gem "foreman"
+  gem "github_changelog_generator", "~> 1.16"
+end
