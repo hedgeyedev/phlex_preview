@@ -1,4 +1,5 @@
 require "tailwindcss-rails"
+require_relative "../phlex_storybook/tasks/install"
 
 TAILWIND_BUILD_CMD = <<~SCRIPT.squish
   #{Tailwindcss::Engine.root.join("exe/tailwindcss")}
@@ -7,6 +8,14 @@ TAILWIND_BUILD_CMD = <<~SCRIPT.squish
   -c #{PhlexStorybook::Engine.root.join("config/tailwind.config.js")}
 SCRIPT
 
+namespace :phlex_storybook do
+  desc "Install Phlex Storybook"
+  task :install do
+    PhlexStorybook::Tasks::Install.start(["install"])
+  end
+end
+
+# the following are private to the engine
 task :tailwind_engine_build do
   system TAILWIND_BUILD_CMD
 end

@@ -70,6 +70,11 @@ And then execute:
 $ bundle
 ```
 
+Then run the installer:
+```shell
+rails phlex_storybook:install
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](LICENSE).

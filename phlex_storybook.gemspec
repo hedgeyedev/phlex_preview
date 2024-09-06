@@ -11,7 +11,11 @@ Gem::Specification.new do |spec|
   spec.license     = "MIT"
 
   spec.post_install_message = <<~MESSAGE
-    Now add phlex_storybook to your application by mounting it in your `config/routes.rb` file:
+    Run the installer:
+
+      $ bin/rails phlex_storybook:install
+
+    Then add phlex_storybook to your application by mounting it in your `config/routes.rb` file:
 
       Rails.application.routes.draw do
         mount PhlexStorybook::Engine => "/phlex_storybook"
