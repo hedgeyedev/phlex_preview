@@ -15,11 +15,13 @@ Gem::Specification.new do |spec|
 
       $ bin/rails phlex_storybook:install
 
-    Then add phlex_storybook to your application by mounting it in your `config/routes.rb` file:
+    Then, add phlex_storybook to your application by mounting it in your `config/routes.rb` file:
 
       Rails.application.routes.draw do
         mount PhlexStorybook::Engine => "/phlex_storybook"
       end
+
+    If necessary, update the `config/initializers/phlex_storybook.rb` file with the path(s) to your components.
   MESSAGE
 
   spec.metadata["homepage_uri"]    = spec.homepage
