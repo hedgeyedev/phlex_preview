@@ -1,7 +1,4 @@
-# desc "Explaining what the task does"
-# task :phlex_storybook do
-#   # Task goes here
-# end
+require "thor"
 
 module PhlexStorybook
   module Tasks
