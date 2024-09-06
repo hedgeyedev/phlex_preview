@@ -1,3 +1,5 @@
+require_relative "dsl"
+
 require "importmap-rails"
 require "turbo-rails"
 require "stimulus-rails"

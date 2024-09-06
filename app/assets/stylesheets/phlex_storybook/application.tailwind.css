@@ -50,7 +50,7 @@
   }
 }
 
-li.story-preview-active, li.story-code-active {
+li.story-button-active {
   @apply rounded border-slate-200 bg-slate-900;
 }
 

@@ -74,7 +74,7 @@ module PhlexStorybook
     end
 
     def story_component
-      story_components.detect { |e| e.component_name == params[:id] }
+      story_components.detect { |_k, e| e.name == params[:id] }&.last
     end
   end
 end

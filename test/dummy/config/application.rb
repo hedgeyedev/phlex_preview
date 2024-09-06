@@ -21,8 +21,10 @@ module Dummy
   class Application < Rails::Application
     config.autoload_paths << "#{root}/app/views"
     config.autoload_paths << "#{root}/app/views/layouts"
-    config.autoload_paths << "#{root}/app/views/components"
+    config.autoload_paths << "#{root}/app/components"
     config.load_defaults Rails::VERSION::STRING.to_f
+
+    Dir["#{root}/app/components/**/*.rb"].each { |file| require file }
 
     # For compatibility with applications that use this config
     config.action_controller.include_all_helpers = false

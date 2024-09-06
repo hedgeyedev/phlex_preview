@@ -22,7 +22,7 @@ module PhlexStorybook
 
           turbo_frame_tag("component_display") do
             div(class: "flex flex-col h-screen max-h-screen", data: { controller: "story-display copy" }) do
-              render_header @story_component.component_name
+              render_header @story_component.name
               div(class: "px-2 flex-1 overflow-y-scroll overflow-x-hidden") do
                 props = @props.blank? ? @story_component.story_for(@story_id) : @props
                 if @story_id && props.nil?
@@ -30,24 +30,15 @@ module PhlexStorybook
                   next
                 end
 
-                div(class: "mb-4") { @story_component.component_description }
+                div(class: "mb-4") { @story_component.description }
 
-                if @story_id
-                  div(class: "container w-full h-fit min-w-0 mr-0") do
-                    render_story_header
-                    render ComponentRendering.new(
-                      story_component: @story_component,
-                      story_id: @story_id,
-                      **props.except(:title).map.with_object({}) { |(k, v), h| h[k] = v }
-                    )
-                  end
-                elsif @story_component.component_stories.present?
-                  div { "Select a story from the left to see its usage..." }
-                else
-                  div(class: "container w-full h-fit min-w-0 mr-0") do
-                    render_story_header
-                    render ComponentRendering.new(story_component: @story_component, **@props)
-                  end
+                div(class: "container w-full h-fit min-w-0 mr-0") do
+                  render_story_header
+                  render ComponentRendering.new(
+                    story_component: @story_component,
+                    story_id: @story_id,
+                    **@story_component.default_story.merge(props || {}),
+                  )
                 end
               end
             end
@@ -69,7 +60,7 @@ module PhlexStorybook
           div(class: "flex justify-between") do
             ul(class: "text-sm text-white inline-flex bg-slate-700 rounded border-slate-200") do
               li(
-                class: "relative px-3 py-2 flex-grow-1 story-preview-active",
+                class: "relative px-3 py-2 flex-grow-1 story-button-active",
                 data: {
                   action: "click->story-display#showPreview click->copy#disable:prevent",
                   story_display_target: "previewBtn",
@@ -86,6 +77,16 @@ module PhlexStorybook
                 },
               ) do
                 button(class: "font-semibold") { "Ruby Code" }
+              end
+
+              li(
+                class: "relative px-3 py-2 flex-grow-1",
+                data: {
+                  action: 'click->story-display#showComponentSource click->copy#disable:prevent',
+                  story_display_target: 'sourceBtn',
+                },
+              ) do
+                button(class: "font-semibold") { "Component Source" }
               end
             end
             button(

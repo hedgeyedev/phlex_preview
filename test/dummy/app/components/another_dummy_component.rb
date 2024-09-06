@@ -1,12 +1,20 @@
 # frozen_string_literal: true
 
 class AnotherDummyComponent < Phlex::HTML
-  def self.component_category
-    "Category 2"
+  include PhlexStorybook::DSL
+
+  def self.long_string
+    100.times.map { |i| "list item #{i + 1}" }.join("\n")
   end
 
-  def self.component_description
-    <<~TEXT
+  def self.short_string
+    3.times.map { |i| "Candidate #{i + 1}" }.join("\n")
+  end
+
+  register_component do
+    component_category "Category 2"
+
+    component_description <<~TEXT
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Morbi hendrerit libero euismod nisl venenatis sollicitudin.
       Curabitur in leo vel justo vulputate ornare at id dolor.
@@ -27,31 +35,17 @@ class AnotherDummyComponent < Phlex::HTML
       Ut non tortor nec ipsum euismod dignissim in suscipit leo.
       Sed imperdiet risus sit amet mi rutrum luctus.
     TEXT
-  end
 
-  def self.component_props
-    [
+    component_props [
       PhlexStorybook::Props::String.new(key: :header, placeholder: "The header", required: true),
       PhlexStorybook::Props::Text.new(key: :text, label: "The list"),
       PhlexStorybook::Props::Boolean.new(key: :truthy, label: "Truthy"),
       PhlexStorybook::Props::Select.new(key: :selectable, label: "Select", include_blank: true, options: %w[Option1 Option2 Option3]),
       PhlexStorybook::Props::Select.new(key: :multi_selectable, label: "Select Several", multiple: true, options: %w[Option1 Option2 Option3]),
     ]
-  end
 
-  def self.component_stories
-    [
-      { title: "Short List", header: "Candidates", text: short_string, truthy: true },
-      { title: "Still Deciding", header: "Things", text: long_string, truthy: false },
-    ]
-  end
-
-  def self.long_string
-    100.times.map { |i| "list item #{i + 1}" }.join("\n")
-  end
-
-  def self.short_string
-    3.times.map { |i| "Candidate #{i + 1}" }.join("\n")
+    component_stories "Short List" => { header: "Candidates", text: short_string, truthy: true },
+                      "Still Deciding" => { header: "Things", text: long_string, truthy: false }
   end
 
   def initialize(header:, text: "", truthy: false, selectable: [], multi_selectable: [])
