@@ -1,19 +1,33 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["previewBtn", "codeBtn", "preview", "code"];
+  static targets = ["previewBtn", "codeBtn", "sourceBtn", "preview", "code", "source"];
 
   showCode() {
-    this.previewTarget.classList.add('hidden');
-    this.codeTarget.classList.remove('hidden');
-    this.previewBtnTarget.classList.remove('story-preview-active');
-    this.codeBtnTarget.classList.add('story-code-active');
+    this.activate({displayTarget: this.codeTarget, buttonTarget: this.codeBtnTarget});
+    this.deactivate({displayTarget: this.previewTarget, buttonTarget: this.previewBtnTarget});
+    this.deactivate({displayTarget: this.sourceTarget, buttonTarget: this.sourceBtnTarget});
+  }
+
+  showComponentSource() {
+    this.activate({displayTarget: this.sourceTarget, buttonTarget: this.sourceBtnTarget});
+    this.deactivate({displayTarget: this.codeTarget, buttonTarget: this.codeBtnTarget});
+    this.deactivate({displayTarget: this.previewTarget, buttonTarget: this.previewBtnTarget});
   }
 
   showPreview() {
-    this.previewTarget.classList.remove('hidden');
-    this.codeTarget.classList.add('hidden');
-    this.previewBtnTarget.classList.add('story-preview-active');
-    this.codeBtnTarget.classList.remove('story-code-active');
+    this.activate({displayTarget: this.previewTarget, buttonTarget: this.previewBtnTarget});
+    this.deactivate({displayTarget: this.codeTarget, buttonTarget: this.codeBtnTarget});
+    this.deactivate({displayTarget: this.sourceTarget, buttonTarget: this.sourceBtnTarget});
+  }
+
+  activate({displayTarget, buttonTarget}) {
+    displayTarget.classList.remove('hidden');
+    buttonTarget.classList.add('story-button-active');
+  }
+
+  deactivate({displayTarget, buttonTarget}) {
+    displayTarget.classList.add('hidden');
+    buttonTarget.classList.remove('story-button-active');
   }
 }

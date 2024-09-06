@@ -5,7 +5,7 @@ module PhlexStorybook
     module Stories
       class ComponentSelector < ApplicationView
         def initialize(story_components:, selected: nil, selected_story: nil)
-          @story_components_by_category = story_components.group_by(&:component_category).sort
+          @story_components_by_category = story_components.values.group_by(&:category).sort
           @selected                     = selected
           @selected_story               = selected_story
         end
@@ -21,10 +21,10 @@ module PhlexStorybook
                     li do
                       component_link(story_component)
 
-                      if story_component.component_stories.present?
+                      if story_component.stories.present?
                         ul do
-                          story_component.component_stories&.each do |props|
-                            li(class: "pl-4 text-sm") { story_link(story_component, props) }
+                          story_component.stories&.each do |title, props|
+                            li(class: "pl-4 text-sm") { story_link(story_component, title, props) }
                           end
                         end
                       end
@@ -46,13 +46,13 @@ module PhlexStorybook
           active = story_component == @selected
           a(
             data: { turbo_stream: true },
-            href: helpers.story_path(story_component.component_name),
+            href: helpers.story_path(story_component.name),
             class: "#{active ? active_selection : ''}",
           ) do
             span(class: "pr-1") do
               render Phlex::Icons::Lucide::Component.new(classes: "#{icon_color(active)} size-4 inline")
             end
-            span { story_component.component_name }
+            span { story_component.name }
           end
         end
 
@@ -60,8 +60,7 @@ module PhlexStorybook
           state ? 'stroke-sky-500' : 'stroke-slate-300'
         end
 
-        def story_link(story_component, props)
-          title  = props.delete :title
+        def story_link(story_component, title, props)
           id     = story_component.id_for(title)
           active = id == @selected_story
           icon   = active ? Phlex::Icons::Lucide::NotebookText : Phlex::Icons::Lucide::Notebook

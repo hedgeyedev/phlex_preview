@@ -11,6 +11,6 @@ module PhlexStorybook
 		include Phlex::Rails::Helpers::PathToAsset
 		include Phlex::Rails::Helpers::Request
 		include Phlex::Rails::Helpers::Tag
-		include ApplicationHelper
+		# include ApplicationHelper
 	end
 end

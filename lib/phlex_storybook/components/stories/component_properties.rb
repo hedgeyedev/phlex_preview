@@ -14,7 +14,7 @@ module PhlexStorybook
         end
 
         def view_template
-          if @story_component&.component_props.blank?
+          if @story_component&.props.blank?
             turbo_frame_tag("component_properties") do
               h2(class: "bg-slate-900 p-2") { "Properties" }
               div(class: "px-2") { "No properties" }
@@ -27,7 +27,7 @@ module PhlexStorybook
             div(class: "px-2") do
               form(action: helpers.story_path(@story_component, story_id: @story_id), method: 'PUT') do
                 ul do
-                  @story_component.component_props.each do |prop|
+                  @story_component.props.each do |prop|
                     li do
                       label(class: 'grid grid-cols-1 w-full') do
                         div { prop.label || prop.key.to_s.capitalize }

@@ -1178,7 +1178,7 @@ fieldset{
   }
 }
 
-li.story-preview-active, li.story-code-active{
+li.story-button-active{
   border-radius: 0.25rem;
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));

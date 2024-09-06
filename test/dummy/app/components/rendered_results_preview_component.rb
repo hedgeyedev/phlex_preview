@@ -1,17 +1,5 @@
 class RenderedResultsPreviewComponent < Phlex::HTML
-
-  def self.component_props
-    [
-      PhlexStorybook::Props::Text.new(key: :html, placeholder: "HTML", required: true),
-    ]
-  end
-
-  def self.component_stories
-    [
-      { title: "Short Doc", html: short_html },
-      { title: "Long Doc", html: long_html },
-    ]
-  end
+  include PhlexStorybook::DSL
 
   def self.short_html
     <<~HTML
@@ -55,6 +43,13 @@ class RenderedResultsPreviewComponent < Phlex::HTML
         </body>
       </html>
     HTML
+  end
+
+  register_component do
+    component_props [
+      PhlexStorybook::Props::Text.new(key: :html, placeholder: "HTML", required: true),
+    ]
+    component_stories "Short Doc" => { html: short_html }, "Long Doc" => { html: long_html }
   end
 
   def initialize(html:)

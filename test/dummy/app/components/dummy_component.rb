@@ -1,16 +1,12 @@
 # frozen_string_literal: true
 
 class DummyComponent < Phlex::HTML
-  def self.component_category
-    "Category 1"
-  end
+  include PhlexStorybook::DSL
 
-  def self.component_description
-    "This is a dummy component"
-  end
-
-  def self.component_name
-    "Dummy Component"
+  register_component do
+    component_category "Category 1"
+    component_description "This is a dummy component"
+    component_name "Dummy Component"
   end
 
   def view_template

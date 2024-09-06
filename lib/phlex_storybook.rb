@@ -12,6 +12,19 @@ require "phlex_storybook/configuration"
 # loader.setup
 
 module PhlexStorybook
+  autoload :DSL, "phlex_storybook/dsl"
+  autoload :ApplicationComponent, "phlex_storybook/application_component"
+  autoload :ApplicationView, "phlex_storybook/application_view"
+  autoload :ComponentStory, "phlex_storybook/component_story"
+
+  module Props
+    autoload :Base, "phlex_storybook/props/base"
+    autoload :String, "phlex_storybook/props/string"
+    autoload :Select, "phlex_storybook/props/select"
+    autoload :Text, "phlex_storybook/props/text"
+    autoload :Boolean, "phlex_storybook/props/boolean"
+  end
+
   class << self
     attr_writer :configuration
 
