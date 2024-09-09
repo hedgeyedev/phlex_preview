@@ -8,6 +8,7 @@ group :development do
   gem "sprockets-rails"
   gem "foreman"
   gem "github_changelog_generator", "~> 1.16"
+  gem "rspec"
 
   # gem 'better_errors'
   # gem 'binding_of_caller'

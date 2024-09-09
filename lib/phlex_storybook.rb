@@ -1,15 +1,17 @@
 # frozen_string_literal: true
 
+require "importmap-rails"
+require "phlex_icons"
+require "phlex-rails"
+require "phlex"
+require "rouge"
+require "stimulus-rails"
+require "turbo_power"
+require "turbo-rails"
+
 require "phlex_storybook/version"
 require "phlex_storybook/engine"
 require "phlex_storybook/configuration"
-
-# require "zeitwerk"
-
-# loader = Zeitwerk::Loader.new
-# loader.inflector = Zeitwerk::GemInflector.new(__FILE__)
-# loader.push_dir(File.expand_path("../app", __dir__))
-# loader.setup
 
 module PhlexStorybook
   autoload :DSL, "phlex_storybook/dsl"

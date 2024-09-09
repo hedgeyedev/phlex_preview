@@ -13,12 +13,15 @@ module PhlexStorybook
           <<~RUBY
             # frozen_string_literal: true
             #
-            # Make sure to add register_component blocks to your components
+            # Make sure to add the DSL and invoke ".storybook" in your components
             #
             # Example:
-            # register_component do
-            #   component_category "Category 1"
-            # end
+            #   class DummyComponent < Phlex::HTML
+            #     include PhlexStorybook::DSL
+            #     storybook do
+            #       category "Category 1"
+            #     end
+            #   end
 
             Dir[Rails.root.join("app/components/**/*.rb").to_s].each { |file| require file }
           RUBY

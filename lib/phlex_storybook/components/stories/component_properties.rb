@@ -30,7 +30,7 @@ module PhlexStorybook
                   @story_component.props.each do |prop|
                     li do
                       label(class: 'grid grid-cols-1 w-full') do
-                        div { prop.label || prop.key.to_s.capitalize }
+                        div { prop.label }
                         render prop.clone_with_value(@props&.fetch(prop.key, nil))
                       end
                     end

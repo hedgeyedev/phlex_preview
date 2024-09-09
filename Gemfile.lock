@@ -119,6 +119,7 @@ GEM
       json
     crass (1.0.6)
     date (3.3.4)
+    diff-lcs (1.5.1)
     drb (2.2.1)
     erubi (1.13.0)
     faraday (2.11.0)
@@ -262,6 +263,19 @@ GEM
     reline (0.5.9)
       io-console (~> 0.5)
     rouge (4.3.0)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.1)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
     sawyer (0.9.2)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
@@ -325,6 +339,7 @@ DEPENDENCIES
   github_changelog_generator (~> 1.16)
   phlex_storybook!
   puma
+  rspec
   sprockets-rails
   web-console
 

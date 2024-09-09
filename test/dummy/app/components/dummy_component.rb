@@ -3,10 +3,10 @@
 class DummyComponent < Phlex::HTML
   include PhlexStorybook::DSL
 
-  register_component do
-    component_category "Category 1"
-    component_description "This is a dummy component"
-    component_name "Dummy Component"
+  storybook do
+    category "Category 1"
+    description "This is a dummy component"
+    name "Dummy Component"
   end
 
   def view_template

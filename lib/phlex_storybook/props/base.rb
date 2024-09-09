@@ -6,9 +6,9 @@ module PhlexStorybook
       def initialize(key:, default: nil, label: nil, placeholder: nil, required: false)
         @key         = key
         @default     = default
-        @label       = label
+        @label       = label || key.to_s.humanize.split.map(&:capitalize).join(" ")
         @placeholder = placeholder
-        @required    = required
+        @required    = !!required
         @value       = nil
       end
 
