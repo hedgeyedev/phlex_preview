@@ -875,8 +875,20 @@ fieldset{
   position: static;
 }
 
+.fixed{
+  position: fixed;
+}
+
 .relative{
   position: relative;
+}
+
+.bottom-0{
+  bottom: 0px;
+}
+
+.right-0{
+  right: 0px;
 }
 
 .mb-4{
@@ -1111,17 +1123,23 @@ fieldset{
   line-height: 1.25rem;
 }
 
-.font-semibold{
-  font-weight: 600;
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
-.capitalize{
-  text-transform: capitalize;
+.font-semibold{
+  font-weight: 600;
 }
 
 .text-gray-900{
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-indigo-200{
+  --tw-text-opacity: 1;
+  color: rgb(199 210 254 / var(--tw-text-opacity));
 }
 
 .text-sky-500{
