@@ -11,7 +11,7 @@ module PhlexStorybook
         @key         = key&.to_sym
         @position    = position
         @default     = default
-        @label       = label || default_key
+        @label       = label || default_label
         @placeholder = placeholder
         @required    = !!required
         @value       = nil
@@ -60,7 +60,7 @@ module PhlexStorybook
 
       private
 
-      def default_key
+      def default_label
         return key.to_s.humanize.split.map(&:capitalize).join(" ") if keyword?
         "Positional Argument: #{position}"
       end
