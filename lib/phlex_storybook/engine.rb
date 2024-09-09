@@ -1,15 +1,5 @@
 require_relative "dsl"
 
-require "importmap-rails"
-require "turbo-rails"
-require "stimulus-rails"
-
-require "phlex"
-require "phlex_icons"
-require "phlex-rails"
-require "rouge"
-require "turbo_power"
-
 module PhlexStorybook
   class Engine < ::Rails::Engine
     isolate_namespace PhlexStorybook

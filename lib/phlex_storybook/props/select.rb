@@ -5,8 +5,8 @@ module PhlexStorybook
 
       def self.default = []
 
-      def initialize(key:, options:, label: nil, include_blank: false, multiple: false, placeholder: nil, required: nil)
-        super(key: key, label: label, placeholder: placeholder, required: required)
+      def initialize(key:, options:, include_blank: false, multiple: false, **base_opts)
+        super(key: key, **base_opts)
         @include_blank = include_blank
         @multiple = multiple
         @options = options

@@ -12,9 +12,9 @@ class AnotherDummyComponent < Phlex::HTML
   end
 
   register_component do
-    component_category "Category 2"
+    category "Category 2"
 
-    component_description <<~TEXT
+    description <<~TEXT
       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Morbi hendrerit libero euismod nisl venenatis sollicitudin.
       Curabitur in leo vel justo vulputate ornare at id dolor.
@@ -36,16 +36,14 @@ class AnotherDummyComponent < Phlex::HTML
       Sed imperdiet risus sit amet mi rutrum luctus.
     TEXT
 
-    component_props [
-      PhlexStorybook::Props::String.new(key: :header, placeholder: "The header", required: true),
-      PhlexStorybook::Props::Text.new(key: :text, label: "The list"),
-      PhlexStorybook::Props::Boolean.new(key: :truthy, label: "Truthy"),
-      PhlexStorybook::Props::Select.new(key: :selectable, label: "Select", include_blank: true, options: %w[Option1 Option2 Option3]),
-      PhlexStorybook::Props::Select.new(key: :multi_selectable, label: "Select Several", multiple: true, options: %w[Option1 Option2 Option3]),
-    ]
+    prop_string :header, placeholder: "The header", required: true
+    prop_text :text, label: "The list"
+    prop_boolean :truthy, label: "Truthy"
+    prop_select :selectable, label: "Select", include_blank: true, options: %w[Option1 Option2 Option3]
+    prop_select :multi_selectable, label: "Select Several", multiple: true, options: %w[Option1 Option2 Option3]
 
-    component_stories "Short List" => { header: "Candidates", text: short_string, truthy: true },
-                      "Still Deciding" => { header: "Things", text: long_string, truthy: false }
+    story "Short List", header: "Candidates", text: short_string, truthy: true
+    story "Still Deciding", header: "Things", text: long_string, truthy: false
   end
 
   def initialize(header:, text: "", truthy: false, selectable: [], multi_selectable: [])
