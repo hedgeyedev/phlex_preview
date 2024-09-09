@@ -6,7 +6,7 @@ module PhlexStorybook
       def view_template
         input(
           class: 'w-full text-slate-700',
-          name: "props[#{key}]",
+          name: "props[#{hash_key}]",
           placeholder: placeholder,
           required: required,
           type: "text",

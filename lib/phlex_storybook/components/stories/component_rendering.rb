@@ -11,16 +11,14 @@ module PhlexStorybook
         end
 
         def view_template
+          initializer = PhlexStorybook::Props::ComponentInitializer.create(@story_component, **@props)
           turbo_frame_tag("story-rendering") do
             div(data: { story_display_target: "preview" }) do
-              render @story_component.component.new(**@props)
+              render initializer.initialize_component(@story_component.component)
             end
 
-            source = @props.blank? ? "render #{@story_component.component.name}.new" : <<~RUBY.strip
-              render #{@story_component.component.name}.new(
-                #{@props.map { |k, v| "#{k}: #{v.inspect}," }.join("\n  ")}
-              )
-            RUBY
+            args = @props.blank? ? "" : "(#{initializer.parameters_as_string}\n)"
+            source = "render #{@story_component.component.name}.new#{args}".strip
 
             render_ruby_code "code", source
             render_ruby_code "source", @story_component.source

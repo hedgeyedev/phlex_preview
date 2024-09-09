@@ -23,8 +23,8 @@ module PhlexStorybook
 
                       if story_component.stories.present?
                         ul do
-                          story_component.stories&.each do |title, props|
-                            li(class: "pl-4 text-sm") { story_link(story_component, title, props) }
+                          story_component.stories&.keys&.each do |title|
+                            li(class: "pl-4 text-sm") { story_link(story_component, title) }
                           end
                         end
                       end
@@ -60,7 +60,7 @@ module PhlexStorybook
           state ? 'stroke-sky-500' : 'stroke-slate-300'
         end
 
-        def story_link(story_component, title, props)
+        def story_link(story_component, title)
           id     = story_component.id_for(title)
           active = id == @selected_story
           icon   = active ? Phlex::Icons::Lucide::NotebookText : Phlex::Icons::Lucide::Notebook

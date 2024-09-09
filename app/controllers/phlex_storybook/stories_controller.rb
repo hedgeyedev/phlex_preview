@@ -59,7 +59,7 @@ module PhlexStorybook
               Components::Stories::ComponentDisplay.new(
                 story_component: story_component,
                 story_id: story_id,
-                **story_component.transform_props(params[:props].permit!.to_h.symbolize_keys),
+                **story_component.transform_props(params[:props].permit!.to_h),
               ),
             )
           ]

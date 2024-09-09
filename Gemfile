@@ -8,6 +8,7 @@ group :development do
   gem "overmind"
   gem "puma"
   gem "rspec"
+  gem "rspec-rails"
   gem "sprockets-rails"
 
   # gem 'better_errors'
