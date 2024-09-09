@@ -45,7 +45,7 @@ class RenderedResultsPreviewComponent < Phlex::HTML
     HTML
   end
 
-  register_component do
+  storybook do
     prop_text :html, placeholder: "HTML", required: true
     story "Short Doc", html: short_html
     story "Long Doc", html: long_html

@@ -3,7 +3,7 @@
 class DummyComponent < Phlex::HTML
   include PhlexStorybook::DSL
 
-  register_component do
+  storybook do
     category "Category 1"
     description "This is a dummy component"
     name "Dummy Component"

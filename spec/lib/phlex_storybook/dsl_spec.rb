@@ -4,7 +4,7 @@ describe PhlexStorybook::DSL do
   class TestComponentOne < Phlex::HTML
     include PhlexStorybook::DSL
 
-    register_component do
+    storybook do
       name 'Test Component'
       description 'This is a test component'
       category 'Test'
@@ -29,7 +29,7 @@ describe PhlexStorybook::DSL do
   class TestComponentTwo < Phlex::HTML
     include PhlexStorybook::DSL
 
-    register_component
+    storybook
 
     def view_template
       div { "testing" }

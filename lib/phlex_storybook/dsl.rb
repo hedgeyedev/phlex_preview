@@ -62,7 +62,7 @@ module PhlexStorybook
     end
 
     class_methods do
-      def register_component(&block)
+      def storybook(&block)
         source_location = block&.source_location || self.instance_method(:view_template)&.source_location
         PhlexStorybook.configuration.register(self, source_location).tap { |sc| sc.name = name }
 

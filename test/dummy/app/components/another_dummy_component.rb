@@ -11,7 +11,7 @@ class AnotherDummyComponent < Phlex::HTML
     3.times.map { |i| "Candidate #{i + 1}" }.join("\n")
   end
 
-  register_component do
+  storybook do
     category "Category 2"
 
     description <<~TEXT

@@ -3,7 +3,7 @@
 class StorylessComponent < Phlex::HTML
   include PhlexStorybook::DSL
 
-  register_component do
+  storybook do
     category "Category 1"
     description "This is a storyless component"
     name "Component without stories"

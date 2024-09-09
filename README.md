@@ -81,24 +81,22 @@ with the storybook. E.g.
 
 ```ruby
 class HelloWorld < Phlex::HTML
-  register_component do
-    # component_category is optional, non-categorized components will appear under "Uncategorized"
-    component_category "Category 1"
+  storybook do
+    # category is optional, non-categorized components will appear under "Uncategorized"
+    category "Category 1"
 
-    # component_name is optional, it defaults to the name of your component
-    component_name "Good ol' Hello"
+    # name is optional, it defaults to the name of your component
+    name "Good ol' Hello"
 
-    # component_description is optional
-    component_description "The typical programmer's first attempt..."
+    # description is optional
+    description "The typical programmer's first attempt..."
 
-    # component props are required if your component takes arguments in #initialize
-    component_props [
-      PhlexStorybook::Props::String.new(key: :who, placeholder: "Who do you want to say hello to?")
-    ]
+    # props are required if your component takes arguments in #initialize
+    prop_string :who, placeholder: "Who do you want to say hello to?"
 
-    # component stories are optional; they are predefined instances of your component
-    component_stories "Arnold" => { who: "Arnie Schwarzenegger" },
-                      "Reagan" => { who: "Ronnie" }
+    # stories are optional; they are predefined instances of your component
+    story "Arnold", who: "Arnie Schwarzenegger"
+    story "Reagan", who: "Ronnie"
   end
 
   def initialize(who: "world")
