@@ -5,8 +5,8 @@ module PhlexStorybook
 
       def self.default = []
 
-      def initialize(key:, options:, include_blank: false, multiple: false, **base_opts)
-        super(key: key, **base_opts)
+      def initialize(options:, include_blank: false, multiple: false, **base_opts)
+        super(**base_opts)
         @include_blank = include_blank
         @multiple = multiple
         @options = options
@@ -27,9 +27,9 @@ module PhlexStorybook
       end
 
       def name
-        return "props[#{key}]" unless multiple
+        return "props[#{hash_key}]" unless multiple
 
-        "props[#{key}][]"
+        "props[#{hash_key}][]"
       end
     end
   end

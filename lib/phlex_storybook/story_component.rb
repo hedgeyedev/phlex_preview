@@ -17,7 +17,7 @@ module PhlexStorybook
     def default_story
       props
         .select { |prop| prop.required }
-        .map { |prop| [prop.key, prop.default || prop.class.default] }
+        .map { |prop| [prop.hash_key, prop.default || prop.class.default] }
         .to_h
     end
 
@@ -30,14 +30,14 @@ module PhlexStorybook
     end
 
     def story_for(id)
-      stories.detect { |key, props| id_for(key) == id }&.last
+      stories.detect { |key, _| id_for(key) == id }&.last
     end
 
     def transform_props(user_data)
       return user_data if user_data.blank?
 
       user_data.map.with_object({}) do |(k, v), h|
-        h[k] = props.detect { |prop| prop.key == k }&.transform(v)
+        h[k] = props.detect { |prop| prop.prop_for?(k) }&.transform(v)
       end.compact
     end
   end

@@ -25,6 +25,7 @@ module PhlexStorybook
     autoload :Select, "phlex_storybook/props/select"
     autoload :Text, "phlex_storybook/props/text"
     autoload :Boolean, "phlex_storybook/props/boolean"
+    autoload :ComponentInitializer, "phlex_storybook/props/component_initializer"
   end
 
   class << self

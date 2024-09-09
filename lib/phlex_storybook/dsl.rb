@@ -28,12 +28,16 @@ module PhlexStorybook
         @story_component.name = v
       end
 
-      def prop(prop_class, key, **options)
-        @story_component.props << prop_class.new(key: key, **options)
+      def prop(prop_class, key_or_position, **options)
+        key = key_or_position.is_a?(Integer) ? nil : key_or_position
+        position = key_or_position.is_a?(Integer) ? key_or_position : nil
+        @story_component.props << prop_class.new(key: key&.to_sym, position: position, **options)
       end
 
-      def story(k, **props)
-        @story_component.stories[k] = props
+      def story(k, *args, **kwargs)
+        @story_component.stories[k] = args.map.with_index.with_object(kwargs) do |(arg, i), h|
+          h[i] = arg
+        end
       end
 
       private

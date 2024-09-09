@@ -31,7 +31,7 @@ module PhlexStorybook
                     li do
                       label(class: 'grid grid-cols-1 w-full') do
                         div { prop.label }
-                        render prop.clone_with_value(@props&.fetch(prop.key, nil))
+                        render prop.clone_with_value(@props&.fetch(prop.position, @props&.fetch(prop.key, nil)))
                       end
                     end
                   end

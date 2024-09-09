@@ -36,17 +36,17 @@ class AnotherDummyComponent < Phlex::HTML
       Sed imperdiet risus sit amet mi rutrum luctus.
     TEXT
 
-    prop_string :header, placeholder: "The header", required: true
+    prop_string 0, placeholder: "The header", required: true
     prop_text :text, label: "The list"
     prop_boolean :truthy, label: "Truthy"
     prop_select :selectable, label: "Select", include_blank: true, options: %w[Option1 Option2 Option3]
     prop_select :multi_selectable, label: "Select Several", multiple: true, options: %w[Option1 Option2 Option3]
 
-    story "Short List", header: "Candidates", text: short_string, truthy: true
-    story "Still Deciding", header: "Things", text: long_string, truthy: false
+    story "Short List", "Candidates", text: short_string, truthy: true
+    story "Still Deciding", "Things", text: long_string, truthy: false
   end
 
-  def initialize(header:, text: "", truthy: false, selectable: [], multi_selectable: [])
+  def initialize(header, text: "", truthy: false, selectable: [], multi_selectable: [])
     @text             = text
     @header           = header
     @multi_selectable = multi_selectable
