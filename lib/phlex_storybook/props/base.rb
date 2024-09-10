@@ -25,6 +25,10 @@ module PhlexStorybook
         end
       end
 
+      def clone_from(hash)
+        clone_with_value(hash&.fetch(position, hash&.fetch(key, nil)))
+      end
+
       def clone_with_value(v)
         p = dup
         p.instance_variable_set(:@value, v)

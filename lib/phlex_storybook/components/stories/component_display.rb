@@ -4,8 +4,6 @@ module PhlexStorybook
   module Components
     module Stories
       class ComponentDisplay < ApplicationView
-        include Phlex::Rails::Helpers::FieldSetTag
-
         def initialize(story_component:, story_id: nil, **props)
           @story_component = story_component
           @story_id        = story_id

@@ -11,17 +11,41 @@ module PhlexStorybook
         end
 
         def view_template
-          initializer = PhlexStorybook::Props::ComponentInitializer.create(@story_component, **@props)
+          component_instance, component_source = @story_component.evaluate!(**@props)
+
           turbo_frame_tag("story-rendering") do
             div(data: { story_display_target: "preview" }) do
-              render initializer.initialize_component(@story_component.component)
+              render component_instance
             end
 
-            args = @props.blank? ? "" : "(#{initializer.parameters_as_string}\n)"
-            source = "render #{@story_component.component.name}.new#{args}".strip
+            render_ruby_code "code", component_source
 
-            render_ruby_code "code", source
-            render_ruby_code "source", @story_component.source
+            div(class: "hidden mt-4 w-full", data: { story_display_target: "source" }) do
+              if PhlexStorybook.configuration.editable?
+                action = helpers.component_path(@story_component, story_id: @story_id)
+                form(action: action, method: "PUT") do
+                  render_component_source
+
+                  div(class: "hidden") { @story_component.props.each { |prop| render prop.clone_from(@props) } }
+
+                  button(
+                    class: "mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                    data: { action: "click->story-display#saveComponentSource" },
+                  ) { "Save" }
+                end
+              else
+                render_component_source
+              end
+            end
+          end
+        end
+
+        private
+
+        def render_component_source
+          div id: "source", class: "p-2 overflow-auto scroll", data: { story_display_target: "editor" }
+          textarea(class: "hidden", data: { story_display_target: "ruby" }, name: "ruby") do
+            @story_component.source
           end
         end
 

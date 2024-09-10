@@ -20,32 +20,6 @@ module PhlexStorybook
             selected_story: story_id,
           )
         end
-
-        format.turbo_stream do
-          story_id = params[:story_id]
-          render turbo_stream: [
-            turbo_stream.push_state(story_path(story_component, story_id: story_id)),
-            turbo_stream.replace(
-              "component_selector",
-              Components::Stories::ComponentSelector.new(
-                story_components: story_components,
-                selected: story_component,
-                selected_story: story_id
-              ),
-            ),
-            turbo_stream.replace(
-              "component_display",
-              Components::Stories::ComponentDisplay.new(story_component: story_component, story_id: story_id),
-            ),
-            turbo_stream.replace(
-              "component_properties",
-              Components::Stories::ComponentProperties.new(
-                story_component: story_component,
-                story_id: story_id,
-              ),
-            ),
-          ]
-        end
       end
     end
 
