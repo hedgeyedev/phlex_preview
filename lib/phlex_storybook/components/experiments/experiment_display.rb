@@ -4,8 +4,6 @@ module PhlexStorybook
   module Components
     module Experiments
       class ExperimentDisplay < ApplicationView
-        # include Phlex::Rails::Helpers::IframeTag
-
         def initialize(name:)
           @name = name
         end
@@ -19,10 +17,17 @@ module PhlexStorybook
           end
 
           turbo_frame_tag("experiment_display") do
-            div(class: "flex flex-col h-screen max-h-screen", data: { controller: "story-display copy" }) do
-              render_header @name
-              div(class: "px-2 flex-1 overflow-y-scroll overflow-x-hidden") do
-                iframe(src: helpers.preview_experiment_path(@name), class: "w-full h-full")
+            form(data: { turbo_streams: true }, method: "PUT", action: helpers.experiment_path(@name)) do
+              div(class: "flex flex-col h-screen max-h-screen w-full", data: { controller: "code-editor" }) do
+                render_header @name
+
+                div(class: "grid grid-flow-row grid-rows-6 h-full w-full px-0") do
+                  div(class: "row-span-3 overflow-x-hidden") do
+                    render ExperimentEditor.new(name: @name)
+                  end
+
+                  render ExperimentPreview.new(name: @name)
+                end
               end
             end
           end
@@ -36,7 +41,15 @@ module PhlexStorybook
         end
 
         def render_header(text)
-          h2(class: "bg-slate-900 text-white border-x border-slate-700 p-2 flex-none") { text }
+          h2(class: "flex justify-between bg-slate-900 text-white border-x border-slate-700 p-2 flex-none") do
+            div { text.classify }
+            div do
+              button(
+                class: "px-1 opacity-70 hover:opacity-100 hover:cursor-pointer",
+                data: { action: "click->code-editor#saveSource" }
+              ) { render Icon.new(:Save, size: :md) }
+            end
+          end
         end
       end
     end

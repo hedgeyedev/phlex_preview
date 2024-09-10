@@ -2,7 +2,7 @@ PhlexStorybook::Engine.routes.draw do
   root to: 'stories#index'
 
   resources :components, only: [:update]
-  resources :experiments, only: [:show] do
+  resources :experiments, only: [:show, :update] do
     member do
       get :preview
     end

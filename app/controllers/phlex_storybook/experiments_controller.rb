@@ -4,7 +4,7 @@ module PhlexStorybook
   class ExperimentsController < ApplicationController
     before_action :reject_unless_editable!
 
-    layout -> { Layouts::ApplicationLayout }
+    layout -> { turbo_frame_request? ? false : Layouts::ApplicationLayout }
 
     def preview
       respond_to do |format|
@@ -23,6 +23,21 @@ module PhlexStorybook
             turbo_stream.replace(
               "experiment_display",
               Components::Experiments::ExperimentDisplay.new(name: experiment_name),
+            ),
+          ]
+        end
+      end
+    end
+
+    def update
+      File.write(experiment, params[:ruby])
+
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(
+              "experiment_preview",
+              Components::Experiments::ExperimentPreview.new(name: experiment_name),
             ),
           ]
         end
