@@ -52,14 +52,10 @@ module PhlexStorybook
             class: "#{active ? active_selection : ''}",
           ) do
             span(class: "pr-1") do
-              render Phlex::Icons::Lucide::Component.new(classes: "#{icon_color(active)} size-4 inline")
+              render Icon.new(:Component, active: active)
             end
             span { story_component.name }
           end
-        end
-
-        def icon_color(state)
-          state ? 'stroke-sky-500' : 'stroke-slate-300'
         end
 
         def render_experiments
@@ -71,7 +67,7 @@ module PhlexStorybook
             li do
               a do
                 span(class: "pr-1") do
-                  render Phlex::Icons::Lucide::FilePlus2.new(classes: "stroke-slate-300 size-4 inline")
+                  render Icon.new(:FilePlus2)
                 end
                 span { "create new" }
               end
@@ -79,12 +75,14 @@ module PhlexStorybook
             PhlexStorybook.configuration.experiments.each do |experiment|
               li do
                 name = File.basename(experiment, ".rb")
+                active = name == @selected
                 a(
                   href: helpers.experiment_path(name),
                   data: { turbo_frame: "_top" },
+                  class: "#{active ? active_selection : ''}",
                 ) do
                   span(class: "pr-1") do
-                    render Phlex::Icons::Lucide::Codesandbox.new(classes: "stroke-slate-300 size-4 inline")
+                    render Icon.new(:Codesandbox, active: active)
                   end
                   span { name.classify }
                 end
@@ -96,14 +94,13 @@ module PhlexStorybook
         def story_link(story_component, title)
           id     = story_component.id_for(title)
           active = id == @selected_story
-          icon   = active ? Phlex::Icons::Lucide::NotebookText : Phlex::Icons::Lucide::Notebook
 
           a(
             class: "#{active ? active_selection : ''}",
             href: helpers.story_path(story_component, story_id: id),
             data: { turbo_frame: "_top" },
           ) do
-            span(class: "pr-1") { render icon.new(classes: "#{icon_color(active)} size-4 inline") }
+            span(class: "pr-1") { render Icon.new(:NotebookText, :Notebook, active: active) }
             span { "#{title}"}
           end
         end
