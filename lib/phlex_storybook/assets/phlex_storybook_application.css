@@ -907,6 +907,10 @@ fieldset{
   display: block;
 }
 
+.inline-block{
+  display: inline-block;
+}
+
 .inline{
   display: inline;
 }
@@ -960,6 +964,10 @@ fieldset{
 
 .w-1\/4{
   width: 25%;
+}
+
+.w-3\/4{
+  width: 75%;
 }
 
 .w-full{

@@ -14,6 +14,8 @@ module PhlexStorybook
           turbo_frame_tag("component_selector") do
             h2(class: "bg-slate-900 p-2") { "Components" }
             div(class: "px-2") do
+              render_experiments
+
               @story_components_by_category.each do |category, story_components|
                 h4 { category }
                 ul do
@@ -45,7 +47,7 @@ module PhlexStorybook
         def component_link(story_component)
           active = story_component == @selected
           a(
-            data: { turbo_stream: true },
+            data: { turbo_frame: "_top" },
             href: helpers.story_path(story_component.name),
             class: "#{active ? active_selection : ''}",
           ) do
@@ -60,6 +62,37 @@ module PhlexStorybook
           state ? 'stroke-sky-500' : 'stroke-slate-300'
         end
 
+        def render_experiments
+          a(data: { turbo_frame: "_top" }) do
+            h4(class: "inline-block") { "Experiments" }
+          end
+
+          ul do
+            li do
+              a do
+                span(class: "pr-1") do
+                  render Phlex::Icons::Lucide::FilePlus2.new(classes: "stroke-slate-300 size-4 inline")
+                end
+                span { "create new" }
+              end
+            end
+            PhlexStorybook.configuration.experiments.each do |experiment|
+              li do
+                name = File.basename(experiment, ".rb")
+                a(
+                  href: helpers.experiment_path(name),
+                  data: { turbo_frame: "_top" },
+                ) do
+                  span(class: "pr-1") do
+                    render Phlex::Icons::Lucide::Codesandbox.new(classes: "stroke-slate-300 size-4 inline")
+                  end
+                  span { name.classify }
+                end
+              end
+            end
+          end
+        end
+
         def story_link(story_component, title)
           id     = story_component.id_for(title)
           active = id == @selected_story
@@ -68,7 +101,7 @@ module PhlexStorybook
           a(
             class: "#{active ? active_selection : ''}",
             href: helpers.story_path(story_component, story_id: id),
-            data: { turbo_stream: true },
+            data: { turbo_frame: "_top" },
           ) do
             span(class: "pr-1") { render icon.new(classes: "#{icon_color(active)} size-4 inline") }
             span { "#{title}"}
