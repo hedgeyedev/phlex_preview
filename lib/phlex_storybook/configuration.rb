@@ -8,6 +8,10 @@ module PhlexStorybook
       @components = {}
     end
 
+    def editable?
+      Rails.env.development?
+    end
+
     def register(component, location)
       @components[component] = StoryComponent.new(component, location: location)
     end
