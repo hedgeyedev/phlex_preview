@@ -1,4 +1,4 @@
-class SampleExperiment < Phlex::HTML
+class SampleView < Phlex::HTML
   include Phlex::Rails::Layout
   include Phlex::Rails::Helpers::CSRFMetaTags
   include Phlex::Rails::Helpers::CSPMetaTag
@@ -10,7 +10,7 @@ class SampleExperiment < Phlex::HTML
       head do
         meta charset: "UTF-8"
         meta name: "viewport", content: "width=device-width, initial-scale=1.0"
-        title { "Experiment: #{self.class.name}" }
+        title { "View: #{self.class.name}" }
         javascript_include_tag "https://cdn.tailwindcss.com"
         csrf_meta_tags
         csp_meta_tag
@@ -53,4 +53,4 @@ class SampleExperiment < Phlex::HTML
   end
 end
 
-render SampleExperiment.new, layout: false
+render SampleView.new, layout: false
