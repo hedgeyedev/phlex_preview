@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    phlex_storybook (0.2.1)
+    phlex_storybook (0.2.2)
       importmap-rails
       phlex-icons (~> 0.11.0)
       phlex-rails (~> 1.2)
