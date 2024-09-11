@@ -22,10 +22,11 @@ module PhlexStorybook
             stylesheet_link_tag "phlex_storybook_application", media: "all"
             turbo_refreshes_with method: :morph, scroll: :preserve
           end
-          span(class: "fixed bottom-0 right-0 p-2 text-xs text-indigo-200") do
-            "v#{PhlexStorybook::VERSION}"
-          end
+
           body class: "bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100" do
+            span(class: "fixed bottom-0 right-0 p-2 text-xs text-indigo-200") do
+              "v#{PhlexStorybook::VERSION}"
+            end
             yield
           end
         end

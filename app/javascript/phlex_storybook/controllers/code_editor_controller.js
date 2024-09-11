@@ -2,10 +2,21 @@ import { Controller } from "@hotwired/stimulus"
 import * as monaco from "monaco-editor"
 
 export default class extends Controller {
-  static targets = ["ruby"];
+  static targets = ["editor", "ruby"];
 
   connect() {
-    monaco.editor.create(this.element, {value: this.source(), language: "ruby", theme: "vs-dark"});
+    this.editor = monaco.editor.create(this.editorTarget, {
+      value: this.source(),
+      language: "ruby",
+      theme: "vs-dark",
+      scrollBeyondLastLine: false,
+      fontSize: 14,
+      automaticLayout: true,
+    });
+  }
+
+  saveSource() {
+    this.rubyTarget.textContent = this.editor.getValue();
   }
 
   source() {
