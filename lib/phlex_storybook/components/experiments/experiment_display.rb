@@ -9,7 +9,7 @@ module PhlexStorybook
         end
 
         def view_template
-          unless PhlexStorybook.configuration.experiment(@name)
+          unless PhlexStorybook.experiment(@name)
             turbo_frame_tag("experiment_display") do
               blank_template
             end
@@ -21,12 +21,14 @@ module PhlexStorybook
               div(class: "flex flex-col h-screen max-h-screen w-full", data: { controller: "code-editor" }) do
                 render_header @name
 
-                div(class: "grid grid-flow-row grid-rows-6 h-full w-full px-0") do
-                  div(class: "row-span-3 overflow-x-hidden") do
+                div(class: "grid grid-flow-row grid-rows-12 h-full w-full px-0") do
+                  div(class: "row-span-6 overflow-x-hidden") do
                     render ExperimentEditor.new(name: @name)
                   end
 
-                  render ExperimentPreview.new(name: @name)
+                  div(class: "row-span-5 overflow-x-hidden") do
+                    render ExperimentPreview.new(name: @name)
+                  end
                 end
               end
             end
@@ -41,8 +43,10 @@ module PhlexStorybook
         end
 
         def render_header(text)
-          h2(class: "flex justify-between bg-slate-900 text-white border-x border-slate-700 p-2 flex-none") do
+          path = PhlexStorybook.experiment(@name).sub("#{Rails.root.to_s}/", "")
+          h2(class: "flex justify-between items-center bg-slate-900 text-white border-x border-slate-700 p-2 flex-none") do
             div { text.classify }
+            div(class: "text-xs text-slate-200") { path }
             div do
               button(
                 class: "px-1 opacity-70 hover:opacity-100 hover:cursor-pointer",

@@ -9,14 +9,17 @@ module PhlexStorybook
         lg: "size-8",
       }
 
-      def initialize(icon_class, inactive_class = nil, active: false, size: nil)
+      def initialize(icon_class, inactive_class = nil, active: false, size: nil, classes: nil)
         @active     = active
         @icon_class = inactive_class && !active ? inactive_class : icon_class
         @size       = size || :sm
+        @classes    = (classes || "").split
       end
 
       def view_template
-        render Phlex::Icons::Lucide.const_get(@icon_class).new(classes: "#{icon_color} #{SIZES[@size]} inline")
+        render Phlex::Icons::Lucide.const_get(@icon_class).new(
+          classes: [icon_color, SIZES[@size], "inline", *@classes].compact.uniq.join(" "),
+        )
       end
 
       private

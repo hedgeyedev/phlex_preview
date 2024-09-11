@@ -44,9 +44,12 @@
       @apply w-full;
 
       a {
-        @apply pl-2 block hover:bg-slate-900 hover:rounded-md;
+        @apply pl-2 block;
       }
     }
+  }
+  .spanner {
+    @apply hover:bg-slate-900 hover:rounded-md
   }
 }
 

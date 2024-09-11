@@ -4,9 +4,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     './public/*.html',
-    './app/helpers/**/*.rb',
-    './app/javascript/**/*.js',
-    './app/views/**/*.{rb,erb,haml,html,slim}',
+    './app/**/*.{rb,erb,haml,html,slim,js}',
     './lib/phlex_storybook/**/*.rb'
   ],
   theme: {

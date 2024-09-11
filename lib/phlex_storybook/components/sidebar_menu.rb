@@ -25,7 +25,7 @@ module PhlexStorybook
                     if story_component.stories.present?
                       ul do
                         story_component.stories&.keys&.each do |title|
-                          li(class: "pl-4 text-sm") { story_link(story_component, title) }
+                          li(class: "spanner pl-4 text-sm") { story_link(story_component, title) }
                         end
                       end
                     end
@@ -48,7 +48,7 @@ module PhlexStorybook
         a(
           data: { turbo_frame: "_top" },
           href: helpers.story_path(story_component.name),
-          class: "#{active ? active_selection : ''}",
+          class: "spanner #{active ? active_selection : ''} text-ellipsis overflow-hidden whitespace-nowrap",
         ) do
           span(class: "pr-1") do
             render Icon.new(:Component, active: active)
@@ -64,26 +64,51 @@ module PhlexStorybook
 
         ul do
           li do
-            a do
-              span(class: "pr-1") do
-                render Icon.new(:FilePlus2)
+            form_tag(
+              helpers.experiments_path,
+              data: { turbo: "false", controller: "experiments" },
+              method: "POST",
+            ) do
+              input(
+                class: "!hidden w-full p-2 text-slate-700 rounded",
+                data: {action: "keydown.esc->experiments#cancel"},
+                name: "id",
+                pattern: "^[a-zA-Z]+(::[a-zA-Z]+)*$",
+                placeholder: "Experiment name (e.g. Foo)",
+                type: "text",
+              )
+              a(class: "cursor-pointer", data: {action: "click->experiments#showInput"}) do
+                span(class: "pr-1") { render Icon.new(:FilePlus2) }
+                span { "create new" }
               end
-              span { "create new" }
             end
           end
-          PhlexStorybook.configuration.experiments.each do |experiment|
+          PhlexStorybook.experiments.each do |experiment|
             li do
               name = File.basename(experiment, ".rb")
               active = name == @selected
-              a(
-                href: helpers.experiment_path(name),
-                data: { turbo_frame: "_top" },
-                class: "#{active ? active_selection : ''}",
-              ) do
-                span(class: "pr-1") do
-                  render Icon.new(:Codesandbox, active: active)
+              span(class: "spanner flex justify-between") do
+                a(
+                  href: helpers.experiment_path(name),
+                  data: { turbo_frame: "_top" },
+                  class: "#{active ? active_selection : ''} w-full text-ellipsis overflow-hidden",
+                ) do
+                  span(class: "whitespace-nowrap") do
+                    span(class: "pr-1") do
+                      render Icon.new(:Codesandbox, active: active)
+                    end
+                    span { name.classify }
+                  end
                 end
-                span { name.classify }
+                div(class: "pr-4") do
+                  link_to(
+                    helpers.experiment_path(name),
+                    class: "cursor-pointer",
+                    data: {turbo_method: :delete, turbo_confirm: "Are you sure?", turbo_frame: "_top"},
+                  ) do
+                    render Icon.new(:Trash2, classes: "hover:stroke-red-600")
+                  end
+                end
               end
             end
           end
@@ -95,7 +120,7 @@ module PhlexStorybook
         active = id == @selected_story
 
         a(
-          class: "#{active ? active_selection : ''}",
+          class: "#{active ? active_selection : ''} text-ellipsis overflow-hidden whitespace-nowrap",
           href: helpers.story_path(story_component, story_id: id),
           data: { turbo_frame: "_top" },
         ) do

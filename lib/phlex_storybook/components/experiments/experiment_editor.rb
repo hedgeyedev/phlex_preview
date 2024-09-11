@@ -18,7 +18,7 @@ module PhlexStorybook
         private
 
         def source
-          File.read(PhlexStorybook.configuration.experiment(@name))
+          File.read(PhlexStorybook.experiment(@name))
         end
       end
     end

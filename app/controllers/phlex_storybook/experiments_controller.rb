@@ -6,6 +6,24 @@ module PhlexStorybook
 
     layout -> { turbo_frame_request? ? false : Layouts::ApplicationLayout }
 
+    def create
+      PhlexStorybook.create_experiment!(experiment_name)
+      redirect_to experiment_path(experiment_name.downcase)
+    end
+
+    def destroy
+      File.delete(experiment)
+      redirect_to root_path
+    end
+
+    def new
+      respond_to do |format|
+        format.html do
+          render Components::Experiments::New.new
+        end
+      end
+    end
+
     def preview
       respond_to do |format|
         format.html { eval File.read(experiment) }
@@ -47,7 +65,7 @@ module PhlexStorybook
     private
 
     def experiment
-      PhlexStorybook.configuration.experiment experiment_name
+      PhlexStorybook.experiment experiment_name
     end
 
     def experiment_name

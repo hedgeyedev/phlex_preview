@@ -47,7 +47,7 @@ module PhlexStorybook
 
         def blank_template
           render_header("Select a component")
-          div(class: "px-2") { "Select a component from the left to see its details" }
+          div(class: "px-2") { "Select a component or experiment from the left to see its details" }
         end
 
         def render_header(text)

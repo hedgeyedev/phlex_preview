@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "fileutils"
 require "importmap-rails"
 require "phlex_icons"
 require "phlex-rails"
@@ -37,6 +38,35 @@ module PhlexStorybook
 
     def configure
       yield(configuration) if block_given?
+    end
+
+    def create_experiment!(name)
+      ensure_experiments_directory!
+      File.write(File.join(experiments_directory, "#{name.demodulize.underscore}.rb"), experiment_template(name))
+    end
+
+    def experiment(name)
+      experiments.detect { |e| e.end_with?("#{name}.rb") }
+    end
+
+    def experiment_template(name)
+      file = Engine.root.join("lib", "phlex_storybook", "tasks", "sample_experiment.rb")
+      File.read(file).gsub("SampleExperiment", name.split("::").map(&:classify).join("::"))
+    end
+
+    def experiments
+      ensure_experiments_directory!
+      Dir[File.join(experiments_directory, "*.rb")]
+    end
+
+    def experiments_directory
+      Rails.root.join("tmp", "experiments")
+    end
+
+    private
+
+    def ensure_experiments_directory!
+      FileUtils.mkdir_p(experiments_directory)
     end
   end
 end
