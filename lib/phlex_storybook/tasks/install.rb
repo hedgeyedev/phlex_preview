@@ -9,6 +9,9 @@ module PhlexStorybook
       def install
         say "Adding phlex_storybook to your application manifest..."
         append_to_file("app/assets/config/manifest.js", "//= link phlex_storybook_manifest.js\n")
+        create_file("tmp/experiments/sample_experiment.rb") do
+          File.read(PhlexStorybook::Engine.root.join("lib/phlex_storybook/tasks/sample_experiment.rb"))
+        end
         create_file("config/initializers/phlex_storybook.rb") do
           <<~RUBY
             # frozen_string_literal: true
