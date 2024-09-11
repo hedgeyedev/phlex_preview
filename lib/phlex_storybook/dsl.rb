@@ -24,10 +24,6 @@ module PhlexStorybook
         PhlexStorybook::Props.const_get(name.to_s.sub('prop_', '').camelize)
       end
 
-      def name(v)
-        @story_component.name = v
-      end
-
       def prop(prop_class, key_or_position, **options)
         key = key_or_position.is_a?(Integer) ? nil : key_or_position
         position = key_or_position.is_a?(Integer) ? key_or_position : nil
@@ -68,8 +64,7 @@ module PhlexStorybook
     class_methods do
       def storybook(&block)
         source_location = block&.source_location || self.instance_method(:view_template)&.source_location
-        PhlexStorybook.configuration.register(self, source_location).tap { |sc| sc.name = name }
-
+        PhlexStorybook.configuration.register(self, source_location)
         Proxy.new(self).instance_eval(&block) if block
       end
     end

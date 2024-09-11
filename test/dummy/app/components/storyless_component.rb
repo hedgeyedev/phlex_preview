@@ -6,7 +6,6 @@ class StorylessComponent < Phlex::HTML
   storybook do
     category "Category 1"
     description "This is a storyless component"
-    name "Component without stories"
     prop_string :header, default: "Default Header", required: true
     prop_text :text, label: "The list"
   end

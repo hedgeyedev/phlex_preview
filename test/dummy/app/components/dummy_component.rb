@@ -6,7 +6,6 @@ class DummyComponent < Phlex::HTML
   storybook do
     category "Category 1"
     description "This is a dummy component"
-    name "Dummy Component"
   end
 
   def view_template

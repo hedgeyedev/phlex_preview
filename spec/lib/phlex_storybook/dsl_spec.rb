@@ -5,7 +5,6 @@ describe PhlexStorybook::DSL do
     include PhlexStorybook::DSL
 
     storybook do
-      name 'Test Component'
       description 'This is a test component'
       category 'Test'
       prop_boolean :bool, default: true
@@ -45,7 +44,7 @@ describe PhlexStorybook::DSL do
   end
 
   it 'registers the component with the correct name' do
-    expect(comp_one.name).to eq('Test Component')
+    expect(comp_one.name).to eq('TestComponentOne')
     expect(comp_two.name).to eq('TestComponentTwo')
   end
 

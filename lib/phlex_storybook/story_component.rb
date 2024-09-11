@@ -1,14 +1,11 @@
 module PhlexStorybook
   class StoryComponent
     attr_reader :component
-    attr_accessor :category, :description, :location, :name, :props, :stories
-    alias to_param name
+    attr_accessor :category, :description, :location, :props, :stories
 
     def initialize(component, location: nil)
       @component   = component
       @location    = location || nil #component.source_location
-      @filename    = nil
-      @name        = component.name
       @category    = "Uncategorized"
       @description = "No description provided"
       @props       = []
@@ -30,8 +27,13 @@ module PhlexStorybook
     end
 
     def id_for(title)
-      Digest::MD5.hexdigest(title)
+      Digest::MD5.hexdigest("#{@component.name} - #{title}")
     end
+
+    def name
+      @component.name
+    end
+    alias to_param name
 
     def source
       File.read filename
@@ -61,7 +63,7 @@ module PhlexStorybook
     private
 
     def filename
-      @filename = component.instance_method(:view_template).source_location.first
+      component.instance_method(:view_template).source_location.first
     end
   end
 end
