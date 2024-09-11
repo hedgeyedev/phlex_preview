@@ -5,7 +5,6 @@ export default class extends Controller {
   static targets = ["editor", "ruby"];
 
   connect() {
-    // this.editorTarget.style.height = ``;
     this.editor = monaco.editor.create(this.editorTarget, {
       value: this.source(),
       language: "ruby",
