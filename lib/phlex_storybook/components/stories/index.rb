@@ -14,7 +14,7 @@ module PhlexStorybook
           turbo_frame_tag("story_components") do
             div class: "flex h-screen w-screen" do
               div class: "flex-none w-1/4 min-w-40 max-w-80 bg-slate-700 text-white story-selector" do
-                render ComponentSelector.new(story_components: @story_components, selected: @selected, selected_story: @selected_story)
+                render SidebarMenu.new(story_components: @story_components, selected: @selected, selected_story: @selected_story)
               end
 
               div class: "flex-auto h-full w-1/2 bg-white" do
