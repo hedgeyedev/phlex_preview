@@ -1,0 +1,192 @@
+# For all options see https://github.com/bbatsov/rubocop/tree/master/config
+
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  DisplayCopNames: true
+  Exclude:
+    - .*/**/*
+    - vendor/**/*
+    - Gemfile
+    - db/schema.rb
+  NewCops: enable
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+# Limit lines to 120 characters.
+Layout/LineLength:
+  Max: 120
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+# Use leading rather than trailing dots on multi-line call chains
+Layout/DotPosition:
+  EnforcedStyle: leading
+
+Metrics/AbcSize:
+  Max: 30
+  Exclude:
+    - 'app/views/**/*.rb'
+
+Metrics/BlockLength:
+  AllowedMethods:
+    # RSpec
+    - context
+    - describe
+    - path
+    # routes
+    - draw
+    # phlex
+    - div
+    - form
+    # ActiveAdmin
+    - build_menu
+    - namespace
+    # Initializers
+    - setup
+  Exclude:
+    # ActiveAdmin
+    - app/admin/**/*.rb
+    - app/views/**/*.rb
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Max: 10
+
+Metrics/ModuleLength:
+  Enabled: false
+
+# Avoid methods longer than 87 lines of code
+Metrics/MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 87
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'app/views/components/*.rb'
+
+Metrics/PerceivedComplexity:
+  Max: 10
+
+Style/ArgumentsForwarding:
+  Exclude:
+    - 'app/views/components/*.rb' # unnamed block argument forwarding causes an InfiniteCorrectionLoop error in RuboCop for some components
+  UseAnonymousForwarding: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
+
+Style/OpenStructUse:
+  Enabled: false
+
+# Expect a trailing comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+# Avoid single-line methods.
+Style/SingleLineMethods:
+  AllowIfMethodIsEmpty: true
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/QuotedSymbols:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/GlobalVars:
+  Enabled: false # We use them Redis + StatsD (though maybe we shouldn't?)
+
+# Wants underscores in all large numbers. Pain in the ass for things like
+# unix timestamps.
+Style/NumericLiterals:
+  Enabled: false
+
+# Wants you to use the same argument names for every reduce. This seems kinda
+# naff compared to naming them semantically
+Style/SingleLineBlockParams:
+  Enabled: false
+
+Style/SignalException:
+  EnforcedStyle: 'only_raise'
+
+# Allow non-ASCII characters (e.g. £) in comments
+Style/AsciiComments:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+# Allow method names beginning with capital letters to match Salesforce conventions
+Naming/MethodName:
+  Enabled: false
+
+Naming/FileName:
+  Exclude:
+    - Gemfile
+    - Guardfile
+
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+Lint/TopLevelReturnWithArgument:
+  Exclude:
+    - '**/*.arb'
+
+Lint/MissingSuper:
+  Exclude:
+    - 'app/views/**/*.rb'
+
+# Rails Cops
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+# RSpec Cops
+RSpec/AlignLeftLetBrace:
+  Enabled: true
+
+RSpec/ExampleLength:
+  Max: 10
+  CountAsOne:
+    - array
+    - heredoc
+    - hash
+    - method_call
+
+RSpec/ContextWording:
+  Prefixes:
+    - and
+    - as
+    - for
+    - if
+    - unless
+    - when
+    - with
+    - without
+
+RSpec/MultipleExpectations:
+  Max: 4
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 25
+  AllowSubject: true
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5

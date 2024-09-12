@@ -2,6 +2,12 @@
 
 module PhlexStorybook
   class ComponentsController < ApplicationController
+
+    def index
+      PhlexStorybook.configuration.rescan!
+      redirect_to root_path
+    end
+
     def update
       respond_to do |format|
         format.turbo_stream do

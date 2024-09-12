@@ -49,7 +49,7 @@ module PhlexStorybook
             div(class: "text-xs text-slate-200") { path }
             div do
               button(
-                class: "px-1 opacity-70 hover:opacity-100 hover:cursor-pointer",
+                class: "pr-2 opacity-70 hover:opacity-100 hover:cursor-pointer",
                 data: { action: "click->code-editor#saveSource" }
               ) { render Icon.new(:Save, size: :md) }
             end

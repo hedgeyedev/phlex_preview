@@ -11,7 +11,16 @@ module PhlexStorybook
 
       def view_template
         turbo_frame_tag("sidebar_menu") do
-          h2(class: "bg-slate-900 p-2") { "Components" }
+          h2(class: "flex justify-between bg-slate-900 p-2") do
+            div { "Components" }
+            div do
+              a(
+                class: "pr-2 opacity-70 hover:opacity-100 hover:cursor-pointer",
+                href: helpers.components_path,
+                data: { turbo: "false" },
+              ) { render Icon.new(:FolderSync, size: :md) }
+            end
+          end
           div(class: "px-2") do
             render_experiments if PhlexStorybook.configuration.editable?
 
