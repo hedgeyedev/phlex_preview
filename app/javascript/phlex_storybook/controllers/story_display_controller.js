@@ -37,6 +37,7 @@ export default class extends Controller {
       value: this.getComponentSource(),
       language: "ruby",
       theme: "vs-dark",
+      automaticLayout: true,
     });
   }
 
