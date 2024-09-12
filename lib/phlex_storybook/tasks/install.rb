@@ -32,7 +32,7 @@ module PhlexStorybook
             #     end
             #   end
 
-            Dir[Rails.root.join("app/components/**/*.rb").to_s].each { |file| require file }
+            PhlexStorybook.configuration.add_component_path("app/components")
           RUBY
         end
       end
