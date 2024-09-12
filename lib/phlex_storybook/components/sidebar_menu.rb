@@ -13,7 +13,7 @@ module PhlexStorybook
         turbo_frame_tag("sidebar_menu") do
           h2(class: "bg-slate-900 p-2") { "Components" }
           div(class: "px-2") do
-            render_experiments
+            render_experiments if PhlexStorybook.configuration.editable?
 
             @story_components_by_category.each do |category, story_components|
               h4 { category }

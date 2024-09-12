@@ -30,7 +30,7 @@ module PhlexStorybook
 
                 div(class: "mb-4") { @story_component.description }
 
-                div(class: "container w-full h-fit min-w-0 mr-0") do
+                div(class: "w-full h-fit min-w-0 mr-0") do
                   render_story_header
                   render ComponentRendering.new(
                     story_component: @story_component,
@@ -47,7 +47,13 @@ module PhlexStorybook
 
         def blank_template
           render_header("Select a component")
-          div(class: "px-2") { "Select a component or experiment from the left to see its details" }
+          div(class: "px-2") do
+            if PhlexStorybook.configuration.editable?
+              "Select a component or experiment from the left to see its details"
+            else
+              "Select a component from the left to see its details"
+            end
+          end
         end
 
         def render_header(text)

@@ -21,7 +21,7 @@ module PhlexStorybook
         create_file("config/initializers/phlex_storybook.rb") do
           <<~RUBY
             # frozen_string_literal: true
-            #
+
             # Make sure to add the DSL and invoke ".storybook" in your components
             #
             # Example:

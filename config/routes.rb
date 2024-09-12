@@ -6,14 +6,19 @@ PhlexStorybook::Engine.routes.draw do
     member do
       get :preview
     end
+
+    collection do
+      # for monaco editor linked to experiments
+      get 'codicon.ttf', to: redirect('/assets/phlex_storybook/codicon.ttf')
+    end
   end
 
   resources :stories, only: [:index, :show, :update] do
     collection do
       get :all
 
-      get 'codicon.ttf', to: redirect(
-        'https://cdn.jsdelivr.net/npm/monaco-editor@0.51.0/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf')
+      # for monaco editor linked to components
+      get 'codicon.ttf', to: redirect('/assets/phlex_storybook/codicon.ttf')
     end
   end
 end

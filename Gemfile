@@ -9,6 +9,7 @@ group :development do
   gem "puma"
   gem "rspec"
   gem "rspec-rails"
+  gem "ruby-lsp"
   gem "sprockets-rails"
 
   # gem 'better_errors'

@@ -20,6 +20,7 @@ module PhlexStorybook
             csp_meta_tag
             javascript_importmap_tags "phlex_storybook"
             stylesheet_link_tag "phlex_storybook_application", media: "all"
+            # stylesheet_link_tag "https://cdn.jsdelivr.net/npm/vscode-codicons@0.0.17/dist/codicon.min.css", media: "all"
             turbo_refreshes_with method: :morph, scroll: :preserve
           end
 
