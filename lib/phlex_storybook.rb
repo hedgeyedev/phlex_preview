@@ -50,8 +50,8 @@ module PhlexStorybook
     end
 
     def experiment_template(name)
-      file = Engine.root.join("lib", "phlex_storybook", "tasks", "sample_experiment.rb")
-      File.read(file).gsub("SampleExperiment", name.split("::").map(&:classify).join("::"))
+      file = Engine.root.join("lib", "phlex_storybook", "tasks", "sample_component.rb")
+      File.read(file).gsub("SampleComponent", name.split("::").map(&:classify).join("::"))
     end
 
     def experiments
