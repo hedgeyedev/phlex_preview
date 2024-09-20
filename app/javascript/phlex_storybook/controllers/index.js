@@ -2,10 +2,14 @@
 
 import { application } from "controllers/application"
 
-// Eager load all controllers defined in the import map under controllers/**/*_controller
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+import StoryDisplayController from "./story_display_controller"
+application.register("story-display", StoryDisplayController)
 
-// Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
-// import { lazyLoadControllersFrom } from "@hotwired/stimulus-loading"
-// lazyLoadControllersFrom("controllers", application)
+import ExperimentsController from "./experiments_controller"
+application.register("experiments", ExperimentsController)
+
+import CopyController from "./copy_controller"
+application.register("copy", CopyController)
+
+import CodeEditorController from "./code_editor_controller"
+application.register("code-editor", CodeEditorController)
