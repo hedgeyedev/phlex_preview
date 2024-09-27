@@ -109,6 +109,14 @@ class HelloWorld < Phlex::HTML
 end
 ```
 
+Now, if you are not using `importmap` in your Rails app, you will need to add the following to
+your `config/development.rb`, as a workaround for a sprockets bug. This is the suggested setting anyway.
+
+```ruby
+ # See: https://stackoverflow.com/questions/77053696/importmap-rails-sprockets-not-finding-stimulus-loading-js-in-fresh-stimulus-ra 
+ config.assets.digest = true
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](LICENSE).

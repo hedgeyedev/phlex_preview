@@ -31,6 +31,12 @@ module PhlexStorybook
             #       category "Category 1"
             #     end
             #   end
+            #
+            # If you aren't using importmaps then you may have add this to your config/development.rb file:
+            # 
+            #   # See: https://stackoverflow.com/questions/77053696/importmap-rails-sprockets-not-finding-stimulus-loading-js-in-fresh-stimulus-ra 
+            #   config.assets.digest = true
+            # 
 
             PhlexStorybook.configuration.add_component_path("app/components")
           RUBY
