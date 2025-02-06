@@ -1,7 +1,7 @@
 class SampleComponent < Phlex::HTML
   def view_template(&)
-    script(type: "module") { unsafe_raw js }
-    style { unsafe_raw css }
+    script(type: "module") { raw safe js }
+    style { raw safe css }
     div(data: { controller: "test" }) do
       h1 { "Hello World" }
       # render MyComponent.new

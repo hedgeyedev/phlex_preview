@@ -9,7 +9,7 @@ group :development do
   gem "puma"
   gem "rspec"
   gem "rspec-rails"
-  gem "ruby-lsp"
+  gem "ruby-lsp", ">= 0.23"
   gem "sprockets-rails"
 
   # gem 'better_errors'

@@ -16,8 +16,8 @@ class SampleView < Phlex::HTML
         csp_meta_tag
       end
       body do
-        script(type: "module") { unsafe_raw js }
-        style { unsafe_raw css }
+        script(type: "module") { raw safe js }
+        style { raw safe css }
         div(data: { controller: "test" }) do
           h1 { "Hello World" }
           # render MyComponent.new

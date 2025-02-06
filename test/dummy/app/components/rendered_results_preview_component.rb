@@ -92,13 +92,13 @@ class RenderedResultsPreviewComponent < Phlex::HTML
     div(class: 'rendered-results-preview') do
       h1 { 'Rendered Results Preview' }
       hr
-      unsafe_raw @html
+      raw safe @html
       hr
     end
 
     div(class: 'rendered-results-preview raw-html') do
       h1(style: "font-family: Karla, sans-serif") { 'Raw HTML' }
-      div(class: 'highlight') { unsafe_raw @formatter.format(@lexer.lex(@html)) if @html }
+      div(class: 'highlight') { raw safe @formatter.format(@lexer.lex(@html)) if @html }
     end
   end
 

@@ -2,7 +2,7 @@
 
 require "fileutils"
 require "importmap-rails"
-require "phlex_icons"
+require "phlex-icons"
 require "phlex-rails"
 require "phlex"
 require "rouge"

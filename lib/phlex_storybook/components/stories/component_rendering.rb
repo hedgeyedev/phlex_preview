@@ -58,10 +58,10 @@ module PhlexStorybook
               pre(class: "hidden", data: { copy_target: "source" }) { source }
               formatter = Rouge::Formatters::HTMLLineTable.new(Rouge::Formatters::HTML.new)
               lexer = Rouge::Lexers::Ruby.new
-              unsafe_raw formatter.format(lexer.lex(source))
+              raw safe formatter.format(lexer.lex(source))
             end
             style do
-              unsafe_raw Rouge::Themes::Molokai.render(scope: "##{id}")
+              raw safe Rouge::Themes::Molokai.render(scope: "##{id}")
             end
           end
         end
