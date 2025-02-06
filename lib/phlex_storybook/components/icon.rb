@@ -17,8 +17,8 @@ module PhlexStorybook
       end
 
       def view_template
-        render Phlex::Icons::Lucide.const_get(@icon_class).new(
-          classes: [icon_color, SIZES[@size], "inline", *@classes].compact.uniq.join(" "),
+        render PhlexIcons::Lucide.const_get(@icon_class).new(
+          class: [icon_color, SIZES[@size], "inline", *@classes].compact.uniq.join(" "),
         )
       end
 

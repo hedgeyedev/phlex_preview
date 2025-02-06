@@ -34,12 +34,12 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "importmap-rails"
-  spec.add_dependency "phlex-rails", "~> 1.2"
+  spec.add_dependency "phlex-rails", "~> 2.0.0.rc1"
   spec.add_dependency "rails", ">= 7", "< 8"
   spec.add_dependency "stimulus-rails"
   spec.add_dependency "tailwindcss-rails", "~> 2.7"
   spec.add_dependency "turbo-rails"
   spec.add_dependency "turbo_power", "~> 0.6.2"
-  spec.add_dependency "phlex-icons", "~> 0.11.0"
+  spec.add_dependency "phlex-icons", ">= 2"
   spec.add_dependency "rouge", "~> 4.3.0"
 end

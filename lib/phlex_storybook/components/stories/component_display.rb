@@ -99,12 +99,12 @@ module PhlexStorybook
               class: "bg-slate-700 group px-2 py-1 rounded",
             ) do
               span(class: 'clipboard') do
-                render Phlex::Icons::Lucide::Copy.new(
-                  classes: "group-enabled:stroke-slate-100 group-disabled:stroke-slate-500 size-5",
+                render PhlexIcons::Lucide::Copy.new(
+                  class: "group-enabled:stroke-slate-100 group-disabled:stroke-slate-500 size-5",
                 )
               end
               span(class: 'check hidden') do
-                render Phlex::Icons::Lucide::CopyCheck.new(classes: "stroke-green-400 size-5")
+                render PhlexIcons::Lucide::CopyCheck.new(class: "stroke-green-400 size-5")
               end
             end
           end
